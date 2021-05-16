@@ -1,0 +1,4 @@
+name: SigmaEvolutions
+version: @version@
+main: com.serversigma.SigmaEvolutions
+api-version: 1.16
