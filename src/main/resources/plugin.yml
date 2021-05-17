@@ -1,4 +1,15 @@
 name: SigmaEvolutions
 version: @version@
+authors: [DevTuca, DevKeni]
 main: com.serversigma.SigmaEvolutions
-api-version: 1.16
+
+commands:
+  pickaxe:
+    permission-message: "§cVocê não tem permissão para utilizar esse comando."
+    permission: "sigmaevolutions.pickaxe"
+    aliases: [picareta]
+
+  sword:
+    aliases: [espada]
+    permission-message: "§cVocê não tem permissão para utilizar esse comando."
+    permission: "sigmaevolutions.sword"

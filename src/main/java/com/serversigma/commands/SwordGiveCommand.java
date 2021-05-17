@@ -1,4 +1,4 @@
-package com.serversigma.command;
+package com.serversigma.commands;
 
 public class SwordGiveCommand {
 }
