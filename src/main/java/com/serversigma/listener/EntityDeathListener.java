@@ -23,6 +23,7 @@ public class EntityDeathListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreak(EntityDeathEvent e) {
+        if (e.getEntity() instanceof Player) return;
 
         Player p = e.getEntity().getKiller();
 

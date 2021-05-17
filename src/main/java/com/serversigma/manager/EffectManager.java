@@ -1,36 +1,41 @@
 package com.serversigma.manager;
 
-import com.sun.glass.ui.EventLoop;
+import com.serversigma.runnable.EffectRunnable;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 
 @RequiredArgsConstructor
 public class EffectManager {
 
     private final Plugin plugin;
+    private EffectRunnable effectRunnable;
+    private final LocationManager locationManager;
 
-    public void startTask(Location location) {
-
-        BukkitScheduler scheduler = plugin.getServer().getScheduler();
-
-        scheduler.cancelAllTasks();
-        scheduler.runTaskTimerAsynchronously(plugin, () -> createHelix(location), 15, 15);
+    public void startTask() {
+        if (effectRunnable == null) {
+            effectRunnable = new EffectRunnable(plugin, this, locationManager);
+            effectRunnable.start();
+        } else {
+            effectRunnable.restart();
+        }
     }
 
+    public void stopTask() {
+        if (effectRunnable == null) return;
+        effectRunnable.stop();
+    }
 
-    private void createHelix(Location loc) {
-
+    public void createHelix(Location loc) {
         int radius = 1;
         for (double y = 0; y <= 2; y += 0.10) {
             double x = radius * Math.cos(y);
             double z = radius * Math.sin(y);
-            loc.getWorld().spigot().playEffect(loc.clone().add(x, y, z), Effect.WITCH_MAGIC);
-            loc.getWorld().spigot().playEffect(loc.clone().add(z, y, x), Effect.WITCH_MAGIC);
+            loc.getWorld().spigot().playEffect(loc.clone().add(x, y, z), Effect.PORTAL);
+            loc.getWorld().spigot().playEffect(loc.clone().add(z, y, x), Effect.PORTAL);
+            loc.getWorld().spigot().playEffect(loc.clone().add(x, y, z), Effect.FLYING_GLYPH);
+            loc.getWorld().spigot().playEffect(loc.clone().add(z, y, x), Effect.FLYING_GLYPH);
         }
     }
 }

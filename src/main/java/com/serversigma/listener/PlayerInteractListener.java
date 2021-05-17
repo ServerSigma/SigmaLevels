@@ -4,6 +4,7 @@ import com.serversigma.inventory.SwordInventory;
 import com.serversigma.manager.EffectManager;
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
+import com.serversigma.manager.LocationManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public class PlayerInteractListener implements Listener {
     private final LevelManager levelManager;
     private final EffectManager effectManager;
     private final ItemManager itemManager;
+    private final LocationManager locationManager;
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
@@ -40,9 +42,8 @@ public class PlayerInteractListener implements Listener {
                 && e.getClickedBlock().getType().name().equals("ENCHANTMENT_TABLE")
         ) {
             e.setCancelled(true);
-            effectManager.startTask(e.getClickedBlock().getLocation()); //????????????????,
-            // e pra startar a task, como tu vai puxar a loc, K,
-            // agora faz isso lá no onEnable
+            locationManager.setTableLocation(e.getClickedBlock().getLocation());
+            effectManager.startTask();
         }
 
         if (item.getType().name().equals("DIAMOND_SWORD")) {

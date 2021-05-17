@@ -23,9 +23,10 @@ public class SwordGiveCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (!(p.hasPermission("sigmaevolutions.pickaxe.give"))) {
-            p.sendMessage("§cVocê não tem acesso a este comando.");
-        }
+//        if (!(p.hasPermission("sigmaevolutions.pickaxe.give"))) {
+//            p.sendMessage("§cVocê não tem acesso a este comando.");
+//        } ja definido na plugin.yml
+
         int slot = p.getInventory().firstEmpty();
         if (slot == -1) {
             p.sendMessage("§c[SigmaEvolutions] Seu inventário precisa estar vazio.");
