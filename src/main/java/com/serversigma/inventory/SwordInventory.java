@@ -10,6 +10,7 @@ import com.serversigma.model.SwordLevel;
 import com.serversigma.utilitie.ItemComposer;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -68,7 +69,7 @@ public class SwordInventory extends PagedInventory {
                     .setNBT("entityKilled", level.getEntitys())
                     .build();
             itemSuppliers.add(() -> InventoryItem.of(itemStack).callback(
-                    ClickType.LEFT,
+                    ClickType.UNKNOWN,
                     click -> {
 
                         if (nbtItem.getInteger("entityKilled") < level.getEntitys()) {
@@ -86,7 +87,9 @@ public class SwordInventory extends PagedInventory {
 
                         itemManager.upgradeSword(itemInHand, swordLevel);
                         updateInventory(player);
-                        player.sendMessage("upou");
+                        player.sendMessage("§aVocê evoluiu sua espada para " + swordLevel);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+                        player.sendTitle("§a§lLEVEL UP!", "");
                     })
             );
         }

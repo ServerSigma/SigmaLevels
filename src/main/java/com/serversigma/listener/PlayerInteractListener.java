@@ -26,6 +26,9 @@ public class PlayerInteractListener implements Listener {
 
         if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 
+        ItemStack item = e.getItem();
+        if (item == null) return;
+
         if (!(
                 item.getType().name().equals("DIAMOND_SWORD")
                         || item.getType().name().equals("BLAZE_ROD")

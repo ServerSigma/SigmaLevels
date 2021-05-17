@@ -33,7 +33,7 @@ public class SwordGiveCommand implements CommandExecutor {
         }
 
         itemManager.giveSword(p);
-        p.sendMessage("§a[SigmaEvolutions] Você pegou uma picareta com sucesso.");
+        p.sendMessage("§a[SigmaEvolutions] Você pegou uma espada com sucesso.");
         return false;
     }
 }

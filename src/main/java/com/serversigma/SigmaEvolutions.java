@@ -4,6 +4,7 @@ import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.serversigma.command.PickaxeGiveCommand;
 import com.serversigma.command.SwordGiveCommand;
 import com.serversigma.listener.BlockBreakListener;
+import com.serversigma.listener.ChunkLoadListener;
 import com.serversigma.listener.EntityDeathListener;
 import com.serversigma.listener.PlayerInteractListener;
 import com.serversigma.manager.EffectManager;

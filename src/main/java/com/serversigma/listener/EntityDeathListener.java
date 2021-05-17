@@ -44,14 +44,6 @@ public class EntityDeathListener implements Listener {
         itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(itemMeta);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 10 * 20, 1));
 
-        /*for (SwordLevel swordLevel : levelManager.getSwordLevels()) {
-            if (entitys == swordLevel.getEntitys()) {
-                itemManager.upgradeSword(itemStack, swordLevel);
-                p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-                p.sendMessage("§a§lLEVEL UP! §aSua espada evoluiu " + swordLevel.getName());
-            }
-        }*/
     }
 }
