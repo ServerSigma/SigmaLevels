@@ -1,8 +1,8 @@
-package com.serversigma.listeners;
+package com.serversigma.listener;
 
-import com.serversigma.managers.ItemManager;
-import com.serversigma.managers.LevelManager;
-import com.serversigma.models.PickaxeLevel;
+import com.serversigma.manager.ItemManager;
+import com.serversigma.manager.LevelManager;
+import com.serversigma.model.PickaxeLevel;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Sound;
@@ -20,7 +20,6 @@ import org.bukkit.potion.PotionEffectType;
 @RequiredArgsConstructor
 public class BlockBreakListener implements Listener {
 
-//    private final ConfigManager configManager;
     private final LevelManager levelManager;
     private final ItemManager itemManager;
 
@@ -29,7 +28,7 @@ public class BlockBreakListener implements Listener {
         if(e.isCancelled()) return;
         Player p = e.getPlayer();
 
-//        if(configManager.playerInWorldBlacklist(p)) return;
+        if(!(p.getWorld().getName().equals("Mundo"))) return;
 
         ItemStack itemStack = p.getItemInHand();
 
@@ -43,7 +42,7 @@ public class BlockBreakListener implements Listener {
         int blocks = (nbtItem.getInteger("blocksBreaked")
                 == null ? 0 : nbtItem.getInteger("blocksBreaked"));
 
-        String displayName = "".replace("%blocos", "" + blocks);
+        String displayName = "§e
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(displayName
                 .replace("&", "§")

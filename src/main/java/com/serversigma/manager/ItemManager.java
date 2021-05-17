@@ -1,8 +1,8 @@
-package com.serversigma.managers;
+package com.serversigma.manager;
 
-import com.serversigma.models.PickaxeLevel;
-import com.serversigma.models.SwordLevel;
-import com.serversigma.utilities.ItemComposer;
+import com.serversigma.model.PickaxeLevel;
+import com.serversigma.model.SwordLevel;
+import com.serversigma.utilitie.ItemComposer;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
-import java.util.List;
 
 @RequiredArgsConstructor
 public class ItemManager {
@@ -35,8 +34,7 @@ public class ItemManager {
                         "",
                         "§7Afiação: §b" + itemMeta.getEnchantLevel(Enchantment.DAMAGE_ALL),
                         "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
-                        "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY),
-                        ""
+                        "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
                 .build();
         player.getInventory().addItem(itemStack);
@@ -45,19 +43,18 @@ public class ItemManager {
 
     public void givePickaxe(Player player) {
 
-        ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
-                .setName("§eSuper Espada")
-                .setNBT("entityKilled", 0)
-                .addEnchantment(Enchantment.DAMAGE_ALL, 5)
-                .addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3)
+        ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
+                .setName("§eSuper Picareta")
+                .setNBT("blocksBreaked", 0)
+                .addEnchantment(Enchantment.DIG_SPEED, 5)
+                .addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3)
                 .addEnchantment(Enchantment.DURABILITY, 3)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .composeMeta(itemMeta -> itemMeta.setLore(Arrays.asList(
                         "",
-                        "§7Afiação: §b" + itemMeta.getEnchantLevel(Enchantment.DAMAGE_ALL),
-                        "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
-                        "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY),
-                        ""
+                        "§7Eficiência: §b" + itemMeta.getEnchantLevel(Enchantment.DIG_SPEED),
+                        "§7Fortuna: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS),
+                        "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
                 .build();
         player.getInventory().addItem(itemStack);
@@ -68,7 +65,8 @@ public class ItemManager {
         ItemMeta itemMeta = itemStack.getItemMeta();
         NBTItem nbtItem = new NBTItem(itemStack);
 
-        int blocks = (nbtItem.getInteger("blocksBreaked") == null ? 0 : nbtItem.getInteger("blocksBreaked"));
+        int blocks = (nbtItem.getInteger("blocksBreaked")
+                == null ? 0 : nbtItem.getInteger("blocksBreaked"));
         nbtItem.setInteger("blocksBreaked", blocks + 1);
 
         String displayName = "".replace("&", "§");

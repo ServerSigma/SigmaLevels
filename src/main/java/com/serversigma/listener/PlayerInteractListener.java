@@ -1,6 +1,6 @@
-package com.serversigma.listeners;
+package com.serversigma.listener;
 
-import com.serversigma.managers.LevelManager;
+import com.serversigma.manager.LevelManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;

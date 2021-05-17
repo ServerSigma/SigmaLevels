@@ -1,4 +1,4 @@
-package com.serversigma.utilities;
+package com.serversigma.utilitie;
 
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;

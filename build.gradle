@@ -1,4 +1,4 @@
-import org.apache.tools.ant.filters.ReplaceTokens
+import org.apache.tools.ant.filters.ReplaceTokens;
 
 plugins {
     id 'me.bristermitten.pdm' version '0.0.30'

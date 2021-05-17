@@ -1,8 +1,8 @@
 package com.serversigma;
 
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
-import com.serversigma.commands.PickaxeGiveCommand;
-import com.serversigma.managers.ItemManager;
+import com.serversigma.command.PickaxeGiveCommand;
+import com.serversigma.manager.ItemManager;
 import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
