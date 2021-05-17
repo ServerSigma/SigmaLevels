@@ -115,6 +115,13 @@ public class ItemManager {
         itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, lootingLevel, true);
         itemMeta.addEnchant(Enchantment.DURABILITY, unbreakingLevel, true);
 
+        itemMeta.setLore(Arrays.asList(
+                "",
+                "§7Afiação: §b" + sharpnessLevel,
+                "§7Pilhagem: §b" + lootingLevel,
+                "§7Inquebrável: §b" + unbreakingLevel
+        ));
+
 //        List<String> lore = configManager.getSwordLore(itemMeta);
 //        itemMeta.setLore(lore);
 

@@ -6,7 +6,6 @@ import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
-import com.serversigma.model.PickaxeLevel;
 import com.serversigma.model.SwordLevel;
 import com.serversigma.utilitie.ItemComposer;
 import de.tr7zw.nbtapi.NBTItem;
@@ -48,38 +47,49 @@ public class SwordInventory extends PagedInventory {
 
         for (SwordLevel level : swordLevelCollection) {
 
-            String lore = (player.getItemInHand().getEnchantmentLevel(Enchantment.DAMAGE_ALL) + 1 > level.getSharpnessLevel()
-                    ? "§cVocê não pode evoluir sua espada."
-                    : "§7Clique §a§lAQUI §7para evoluir sua espada.");
+            String lore = (player.getItemInHand().getEnchantmentLevel(Enchantment.DAMAGE_ALL) + 1 < level.getSharpnessLevel()
+                    ? "§7Clique §a§lAQUI §7para evoluir sua espada."
+                    : "§cVocê não pode evoluir sua espada");
 
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
                     .setName(level.getName())
-                    .setNBT("entityKilled", level.getEntitys())
                     .setLore(
                             "§r",
+                            "§7Afiação: §b" + level.getSharpnessLevel(),
+                            "§7Pilhagem: §b" + level.getLootingLevel(),
+                            "§7Inquebrável: §b" + level.getUnbreakingLevel(),
+                            "",
                             lore
                     )
+                    .setNBT("entityKilled", level.getEntitys())
                     .build();
             itemSuppliers.add(() -> InventoryItem.of(itemStack).callback(
                     ClickType.LEFT,
                     click -> {
+
                         ItemStack itemInHand = player.getItemInHand();
                         NBTItem nbtItem = new NBTItem(itemInHand);
-                        if(nbtItem.getInteger("entityKilled") < level.getEntitys()) {
+
+                        if (nbtItem.getInteger("entityKilled") < level.getEntitys()) {
                             player.sendMessage("§copa");
-                        } else {
-                            if(itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) > level.getSharpnessLevel()) {
-                                player.sendMessage("§cVocê não pode evoluir sua espada, pois já está evoluida.");
-                            }
-                            SwordLevel swordLevel = levelManager.getSwordLevelByBlocks(nbtItem.getInteger("entityKilled"));
-                            itemManager.upgradeSword(itemStack, swordLevel);
-                            player.sendMessage("upou");
+                            return;
                         }
-                    }
-            ));
 
+                        if (itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) + 1 > level.getSharpnessLevel()) {
+                            player.sendMessage("§cVocê não pode evoluir sua espada, pois já está evoluida.");
+                            return;
+
+                        }
+
+                        NBTItem nbtItem1 = new NBTItem(click.getItemStack());
+                        SwordLevel swordLevel = levelManager.getSwordLevelByBlocks(nbtItem1.getInteger("entityKilled"));
+
+                        itemManager.upgradeSword(itemInHand, swordLevel);
+                        updateInventory(player);
+                        player.sendMessage("upou");
+                    })
+            );
         }
-
         return itemSuppliers;
     }
 }

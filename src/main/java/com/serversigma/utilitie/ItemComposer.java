@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 public class ItemComposer {
 
     private final ItemStack item;
+    private NBTItem nbtItem;
 
     public ItemComposer(Material material) {
         this.item = new ItemStack(material);
@@ -39,8 +40,8 @@ public class ItemComposer {
     }
 
     public ItemComposer setNBT(String key, Integer value) {
-        NBTItem nbtItem = toNBT(item);
-        toNBT(item).setInteger(key, value);
+        this.nbtItem = new NBTItem(item);
+        nbtItem.setInteger(key, value);
         nbtItem.applyNBT(item);
         return this;
     }
@@ -74,7 +75,7 @@ public class ItemComposer {
     }
 
     public ItemStack build() {
-        return toNBT(item).getItem();
+        return nbtItem.getItem();
     }
 
 }
