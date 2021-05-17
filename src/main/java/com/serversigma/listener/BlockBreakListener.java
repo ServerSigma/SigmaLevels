@@ -15,6 +15,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -22,6 +23,7 @@ import org.bukkit.potion.PotionEffectType;
 public class BlockBreakListener implements Listener {
 
     private final LevelManager levelManager;
+    private final Plugin plugin;
     private final ItemManager itemManager;
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -30,6 +32,8 @@ public class BlockBreakListener implements Listener {
         Player p = e.getPlayer();
 
         if(!(p.getWorld().getName().equals("Mundo"))) return;
+
+        if(e.getBlock().getType().name().equals("ENCHANTMENT_TABLE")) plugin.getServer().getScheduler().cancelAllTasks();
 
         ItemStack itemStack = p.getItemInHand();
 

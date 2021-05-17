@@ -2,10 +2,8 @@ package com.serversigma.listener;
 
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
-import com.serversigma.model.SwordLevel;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -43,7 +41,7 @@ public class EntityDeathListener implements Listener {
         nbtItem.setInteger("entityKilled", entitys + 1);
         nbtItem.applyNBT(itemStack);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("§eSuper Espada §8» §7" + entitys);
+        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(itemMeta);
         p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 10 * 20, 1));

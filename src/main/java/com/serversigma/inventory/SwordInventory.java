@@ -47,10 +47,14 @@ public class SwordInventory extends PagedInventory {
 
         for (SwordLevel level : swordLevelCollection) {
 
-            String lore = (player.getItemInHand().getEnchantmentLevel(Enchantment.DAMAGE_ALL) + 1 < level.getSharpnessLevel()
-                    ? "§7Clique §a§lAQUI §7para evoluir sua espada."
-                    : "§cVocê não pode evoluir sua espada");
+            ItemStack itemInHand = player.getItemInHand();
+            NBTItem nbtItem = new NBTItem(itemInHand);
 
+            String lore = (nbtItem.getInteger("entityKilled") >= level.getEntitys()
+                    && itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) < level.getSharpnessLevel()
+                    ? "§7Clique §a§lAQUI §7para evoluir sua espada."
+                    : "§cVocê não pode evoluir sua espada."
+            );
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
                     .setName(level.getName())
                     .setLore(
@@ -67,18 +71,14 @@ public class SwordInventory extends PagedInventory {
                     ClickType.LEFT,
                     click -> {
 
-                        ItemStack itemInHand = player.getItemInHand();
-                        NBTItem nbtItem = new NBTItem(itemInHand);
-
                         if (nbtItem.getInteger("entityKilled") < level.getEntitys()) {
                             player.sendMessage("§copa");
                             return;
                         }
 
-                        if (itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) + 1 > level.getSharpnessLevel()) {
+                        if (itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) >= level.getSharpnessLevel()) {
                             player.sendMessage("§cVocê não pode evoluir sua espada, pois já está evoluida.");
                             return;
-
                         }
 
                         NBTItem nbtItem1 = new NBTItem(click.getItemStack());

@@ -25,7 +25,6 @@ public class ItemManager {
 
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
                 .setName("§eSuper Espada")
-                .setNBT("entityKilled", 0)
                 .addEnchantment(Enchantment.DAMAGE_ALL, 5)
                 .addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3)
                 .addEnchantment(Enchantment.DURABILITY, 3)
@@ -36,6 +35,7 @@ public class ItemManager {
                         "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
                         "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
+                .setNBT("entityKilled", 0)
                 .build();
         player.getInventory().addItem(itemStack);
 
@@ -45,7 +45,6 @@ public class ItemManager {
 
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                 .setName("§eSuper Picareta")
-                .setNBT("blocksBreaked", 0)
                 .addEnchantment(Enchantment.DIG_SPEED, 5)
                 .addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 3)
                 .addEnchantment(Enchantment.DURABILITY, 3)
@@ -56,6 +55,7 @@ public class ItemManager {
                         "§7Fortuna: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS),
                         "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
+                .setNBT("blocksBreaked", 0)
                 .build();
         player.getInventory().addItem(itemStack);
 

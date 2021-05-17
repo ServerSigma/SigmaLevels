@@ -6,11 +6,12 @@ import com.serversigma.command.SwordGiveCommand;
 import com.serversigma.listener.BlockBreakListener;
 import com.serversigma.listener.EntityDeathListener;
 import com.serversigma.listener.PlayerInteractListener;
+import com.serversigma.manager.EffectManager;
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
 import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
+import org.bukkit.Location;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,10 @@ public final class SigmaEvolutions extends JavaPlugin {
     public void onEnable() {
         loadDependencies();
         registerListeners();
+    }
+
+    public void onDisable() {
+        Bukkit.getServer().getScheduler().cancelAllTasks();
     }
 
     private void loadDependencies() {
@@ -37,15 +42,19 @@ public final class SigmaEvolutions extends JavaPlugin {
 
         ItemManager itemManager = new ItemManager(this);
         LevelManager levelManager = new LevelManager(this);
+        EffectManager effectManager = new EffectManager(this);
+//        effectManager.startTask();
         levelManager.loadPickaxeLevels();
         levelManager.loadSwordLevels();
-       getCommand("pickaxe").setExecutor(new PickaxeGiveCommand(itemManager));
-       getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
+        getCommand("pickaxe").setExecutor(new PickaxeGiveCommand(itemManager));
+        getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
         registerListeners(
-                new BlockBreakListener(levelManager, itemManager),
+                new BlockBreakListener(levelManager, this, itemManager),
                 new EntityDeathListener(levelManager, itemManager),
-                new PlayerInteractListener(levelManager, itemManager)
+                new PlayerInteractListener(levelManager, effectManager, itemManager),
+                new ChunkLoadListener()
         );
+
     }
 
     private void registerListeners(Listener... listeners) {
