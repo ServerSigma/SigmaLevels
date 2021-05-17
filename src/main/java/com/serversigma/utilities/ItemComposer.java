@@ -3,6 +3,7 @@ package com.serversigma.utilities;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -24,6 +25,12 @@ public class ItemComposer {
         item.setItemMeta(meta);
         return this;
     }
+
+    public ItemComposer addItemFlag(ItemFlag... itemflag) {
+        composeMeta(meta -> meta.addItemFlags(itemflag));
+        return this;
+    }
+
 
     public ItemComposer setName(String name) {
         if (name == null || name.equalsIgnoreCase("")) return this;

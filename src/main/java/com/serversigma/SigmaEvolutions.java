@@ -12,7 +12,6 @@ public final class SigmaEvolutions extends JavaPlugin {
     @Override
     public void onEnable() {
         loadDependencies();
-        registerCommands();
         registerListeners();
     }
 
