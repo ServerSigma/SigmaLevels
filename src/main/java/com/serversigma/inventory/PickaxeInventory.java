@@ -86,10 +86,13 @@ public class PickaxeInventory extends PagedInventory {
                         }
 
                         NBTItem nbtItem1 = new NBTItem(click.getItemStack());
+
+                        PickaxeLevel level2 = levelManager.getPickaxeLevelByBlocks(10);
+
                         PickaxeLevel pickaxeLevel = levelManager.getPickaxeLevelByBlocks(nbtItem1.getInteger("blocksBreaked"));
 
                         System.out.println(pickaxeLevel);
-                        itemManager.upgradePickaxe(itemInHand, pickaxeLevel);
+                        itemManager.upgradePickaxe(itemInHand, level2);
                         updateInventory(player);
                         player.sendMessage("§aVocê evoluiu sua picareta para " + pickaxeLevel);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);

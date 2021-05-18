@@ -61,18 +61,9 @@ public class ItemManager {
 
     }
 
-    public void updatePickaxe(ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        NBTItem nbtItem = new NBTItem(itemStack);
-
-        int blocks = nbtItem.getInteger("blocksBreaked");
-        itemMeta.setDisplayName("§eSuper Picareta §8» §7" + (blocks + 1));
-        itemStack.setItemMeta(itemMeta);
-        nbtItem.applyNBT(itemStack);
-    }
-
     public void upgradePickaxe(ItemStack itemStack, PickaxeLevel level) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+
         int efficiencyLevel = level.getEfficiencyLevel();
         int fortuneLevel = level.getFortuneLevel();
         int unbreakingLevel = level.getUnbreakingLevel();
@@ -80,19 +71,7 @@ public class ItemManager {
         itemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, fortuneLevel, true);
         itemMeta.addEnchant(Enchantment.DURABILITY, unbreakingLevel, true);
 
-//        List<String> lore = configManager.getPickaxeLore(itemMeta);
-//        itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-    }
-
-    public void updateSword(ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        NBTItem nbtItem = new NBTItem(itemStack);
-
-        int entitys = nbtItem.getInteger("entityKilled");
-        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
-        itemStack.setItemMeta(itemMeta);
-        nbtItem.applyNBT(itemStack);
     }
 
     public void upgradeSword(ItemStack itemStack, SwordLevel swordLevel) {
@@ -111,10 +90,6 @@ public class ItemManager {
                 "§7Pilhagem: §b" + lootingLevel,
                 "§7Inquebrável: §b" + unbreakingLevel
         ));
-
-//        List<String> lore = configManager.getSwordLore(itemMeta);
-//        itemMeta.setLore(lore);
-
         itemStack.setItemMeta(itemMeta);
     }
 
