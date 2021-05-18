@@ -9,6 +9,7 @@ import com.serversigma.manager.LevelManager;
 import com.serversigma.model.PickaxeLevel;
 import com.serversigma.utilitie.ItemComposer;
 import de.tr7zw.nbtapi.NBTItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -28,8 +29,8 @@ public class PickaxeInventory extends PagedInventory {
 
     public PickaxeInventory(LevelManager levelManager, Player player, ItemManager itemManager) {
         super(
-                "sigmaevolutions.sword",
-                "§aMenu de Espadas",
+                "sigmaevolutions.pickaxe",
+                "§7Menu de picaretas",
                 27
         );
         this.levelManager = levelManager;
@@ -50,12 +51,19 @@ public class PickaxeInventory extends PagedInventory {
 
             ItemStack itemInHand = player.getItemInHand();
             NBTItem nbtItem = new NBTItem(itemInHand);
+            int remaingBlocks = level.getBlocks() - nbtItem.getInteger("blocksBreaked");
+            String lore = "";
 
-            String lore = (nbtItem.getInteger("blocksBreaked") >= level.getBlocks()
-                    && itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) < level.getEfficiencyLevel()
-                    ? "§7Clique §a§lAQUI §7para evoluir sua picareta."
-                    : "§cFaltam " + (level.getBlocks() - nbtItem.getInteger("blocksBreaked")) + " §cblocos"
-            );
+            if (remaingBlocks > 0) {
+                lore = "§cFaltam §7" + remaingBlocks + " §cblocos para evoluir sua picareta.";
+            }
+            if (remaingBlocks <= 0) {
+                lore = "§aClique aqui para evoluiur sua picareta.";
+            }
+            if (itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) >= level.getEfficiencyLevel()) {
+                lore = "§bVocê já evoluiu sua picareta para esse nível.";
+            }
+
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                     .setName(level.getName())
                     .setLore(
@@ -66,34 +74,30 @@ public class PickaxeInventory extends PagedInventory {
                             "",
                             lore
                     )
-                    .setNBT("blocksBreaked", level.getBlocks())
                     .build();
 
             itemSuppliers.add(() -> InventoryItem.of(itemStack).callback(
                     ClickType.LEFT,
                     click -> {
-                        if (nbtItem.getInteger("blocksBreaked") < level.getBlocks()) {
-//
-                            player.sendMessage("§cAinda falta " + 1);
+                        if (remaingBlocks > 0) {
+                            player.sendMessage("§cFalta §7" + remaingBlocks + " §cblocos para evoluir até esse nível.");
                             player.playSound(player.getLocation(), Sound.NOTE_BASS, 1, 1);
                             return;
                         }
 
                         if (itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) >= level.getEfficiencyLevel()) {
                             player.playSound(player.getLocation(), Sound.NOTE_BASS, 1, 1);
-                            player.sendMessage("§cVocê já evoluiu sua picareta para esse nível.");
+                            player.sendMessage("§cOps, sua picareta já tem um encantamento superior.");
                             return;
                         }
 
-                        NBTItem nbtItem1 = new NBTItem(click.getItemStack());
-                        PickaxeLevel pickaxeLevel = levelManager.getPickaxeLevelByBlocks(nbtItem1.getInteger("blocksBreaked"));
+                        PickaxeLevel pickaxeLevel = levelManager.getPickaxeNextLevel(level.getBlocks());
 
-                        System.out.println(pickaxeLevel);
                         itemManager.upgradePickaxe(itemInHand, pickaxeLevel);
-                        updateInventory(player);
-                        player.sendMessage("§aVocê evoluiu sua picareta para " + pickaxeLevel);
+                        player.sendMessage("§aVocê evoluiu sua picareta para " + level.getName());
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
-                        player.sendTitle("§a§lLEVEL UP!", "");
+                        player.sendTitle("§a§lLEVEL UP!", level.getName());
+                        updateInventory(player);
                     })
             );
         }

@@ -8,6 +8,7 @@ import com.serversigma.manager.LevelManager;
 import com.serversigma.manager.LocationManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 @RequiredArgsConstructor
 public class PlayerInteractListener implements Listener {
 
-    // private final Plugin plugin;
     private final LevelManager levelManager;
     private final EffectManager effectManager;
     private final ItemManager itemManager;
@@ -26,9 +26,9 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
-
         if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 
+        Player p = e.getPlayer();
         ItemStack item = e.getItem();
         if (item == null) return;
 
@@ -52,21 +52,22 @@ public class PlayerInteractListener implements Listener {
         if (!nbtItem.hasNBTData()) return;
 
 
-        if (e.getItem().getType().name().equals("DIAMOND_SWORD") && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
+        if (e.getItem().getType().name().equals("DIAMOND_SWORD")
+                && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
             e.setCancelled(true);
 
-
-            if (nbtItem.getInteger("entityKilled") != null) {
-                SwordInventory swordInventory = new SwordInventory(p, levelManager, itemManager);
+            if (nbtItem.getInteger("entityKilled") >= 0) {
+                SwordInventory swordInventory = new SwordInventory(levelManager, p, itemManager);
                 swordInventory.openInventory(p);
                 p.sendMessage("§7Abrindo menu...");
             }
         }
 
-        if (e.getItem().getType().name().equals("DIAMOND_PICKAXE") && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
+        if (e.getItem().getType().name().equals("DIAMOND_PICKAXE")
+                && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
             e.setCancelled(true);
 
-            if (nbtItem.getInteger("blocksBreaked") != null) {
+            if (nbtItem.getInteger("blocksBreaked") >= 0) {
                 PickaxeInventory pickaxeInventory = new PickaxeInventory(levelManager, p, itemManager);
                 pickaxeInventory.openInventory(p);
                 p.sendMessage("§7Abrindo menu...");
