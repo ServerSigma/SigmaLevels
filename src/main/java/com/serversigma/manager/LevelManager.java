@@ -35,34 +35,16 @@ public class LevelManager {
         swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯✯✯", 10, 10, 8, 8));
     }
 
-    public PickaxeLevel getPickaxeLevelByBlocks(int blocks) {
-        switch(blocks) {
-            case 1:
-                return pickaxeLevels.get(0);
-            case 2:
-                return pickaxeLevels.get(1);
-            case 3:
-                return pickaxeLevels.get(2);
-            case 4:
-                return pickaxeLevels.get(3);
-            case 5:
-                return pickaxeLevels.get(4);
+    public PickaxeLevel getPickaxeNextLevel(int blocks) {
+        for (PickaxeLevel level: pickaxeLevels) {
+            if (blocks == level.getBlocks()) return level;
         }
         return null;
     }
 
-    public SwordLevel getSwordLevelByBlocks(int entitys) {
-        switch(entitys) {
-            case 1:
-                return swordLevels.get(0);
-            case 2:
-                return swordLevels.get(1);
-            case 3:
-                return swordLevels.get(2);
-            case 4:
-                return swordLevels.get(3);
-            case 5:
-                return swordLevels.get(4);
+    public SwordLevel getSwordNextLevel(int entitys) {
+        for (SwordLevel level: swordLevels) {
+            if (entitys == level.getEntitys()) return level;
         }
         return null;
     }

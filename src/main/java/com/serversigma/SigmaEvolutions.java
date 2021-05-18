@@ -22,7 +22,6 @@ public final class SigmaEvolutions extends JavaPlugin {
     private LevelManager levelManager;
     private EffectManager effectManager;
     private LocationManager locationManager;
-    private EffectRunnable runnable;
 
     @Override
     public void onEnable() {
@@ -42,8 +41,9 @@ public final class SigmaEvolutions extends JavaPlugin {
 
     }
 
+    @Override
     public void onDisable() {
-        Bukkit.getServer().getScheduler().cancelAllTasks();
+        effectManager.stopTask();
     }
 
     private void loadDependencies() {
@@ -74,12 +74,8 @@ public final class SigmaEvolutions extends JavaPlugin {
         itemManager = new ItemManager(this);
         levelManager = new LevelManager(this);
 
-        runnable = new EffectRunnable(this, effectManager, locationManager);
-
         levelManager.loadPickaxeLevels();
         levelManager.loadSwordLevels();
-
         effectManager.startTask();
-
     }
 }

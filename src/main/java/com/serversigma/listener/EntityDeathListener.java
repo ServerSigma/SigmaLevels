@@ -26,7 +26,6 @@ public class EntityDeathListener implements Listener {
         if (e.getEntity() instanceof Player) return;
 
         Player p = e.getEntity().getKiller();
-
         if (!(p.getWorld().getName().equals("Mundo"))) return;
 
         ItemStack itemStack = p.getItemInHand();
