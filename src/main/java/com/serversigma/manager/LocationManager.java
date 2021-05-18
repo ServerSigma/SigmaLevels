@@ -11,9 +11,10 @@ public class LocationManager {
 
     private Location location;
     private final Plugin plugin;
-    private final FileConfiguration config;
+
 
     public Location getTableLocation() {
+        FileConfiguration config = plugin.getConfig();
         if (location == null) {
             World world = plugin.getServer().getWorld(config.getString("table.world"));
             double x = config.getDouble("table.locX");
@@ -25,6 +26,7 @@ public class LocationManager {
     }
 
     public void setTableLocation(Location location) {
+        FileConfiguration config = plugin.getConfig();
         config.set("table.world", location.getWorld().getName());
         config.set("table.locX", location.getX());
         config.set("table.locY", location.getY());

@@ -1,5 +1,6 @@
 package com.serversigma.listener;
 
+import com.serversigma.inventory.PickaxeInventory;
 import com.serversigma.inventory.SwordInventory;
 import com.serversigma.manager.EffectManager;
 import com.serversigma.manager.ItemManager;
@@ -46,13 +47,14 @@ public class PlayerInteractListener implements Listener {
             effectManager.startTask();
         }
 
-        if (item.getType().name().equals("DIAMOND_SWORD")) {
+        ItemStack itemStack = p.getItemInHand();
+        NBTItem nbtItem = new NBTItem(itemStack);
+        if (!nbtItem.hasNBTData()) return;
 
-            Player p = e.getPlayer();
 
-            ItemStack itemStack = p.getItemInHand();
-            NBTItem nbtItem = new NBTItem(itemStack);
-            if (!nbtItem.hasNBTData()) return;
+        if (e.getItem().getType().name().equals("DIAMOND_SWORD") && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
+            e.setCancelled(true);
+
 
             if (nbtItem.getInteger("entityKilled") != null) {
                 SwordInventory swordInventory = new SwordInventory(p, levelManager, itemManager);
@@ -60,6 +62,17 @@ public class PlayerInteractListener implements Listener {
                 p.sendMessage("§7Abrindo menu...");
             }
         }
+
+        if (e.getItem().getType().name().equals("DIAMOND_PICKAXE") && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
+            e.setCancelled(true);
+
+            if (nbtItem.getInteger("blocksBreaked") != null) {
+                PickaxeInventory pickaxeInventory = new PickaxeInventory(levelManager, p, itemManager);
+                pickaxeInventory.openInventory(p);
+                p.sendMessage("§7Abrindo menu...");
+            }
+        }
+
     }
 
 }

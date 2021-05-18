@@ -43,8 +43,6 @@ public class EntityDeathListener implements Listener {
         nbtItem.applyNBT(itemStack);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(itemMeta);
-
     }
 }

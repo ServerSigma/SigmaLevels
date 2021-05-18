@@ -10,6 +10,7 @@ import com.serversigma.manager.EffectManager;
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
 import com.serversigma.manager.LocationManager;
+import com.serversigma.runnable.EffectRunnable;
 import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -17,17 +18,28 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SigmaEvolutions extends JavaPlugin {
 
-    ItemManager itemManager;
-    LevelManager levelManager;
-    EffectManager effectManager;
-    LocationManager locationManager;
+    private ItemManager itemManager;
+    private LevelManager levelManager;
+    private EffectManager effectManager;
+    private LocationManager locationManager;
+    private EffectRunnable runnable;
 
     @Override
     public void onEnable() {
+
         saveDefaultConfig();
         loadDependencies();
-        registerListeners();
-        effectManager.startTask();
+        loadManagers();
+
+        getCommand("pickaxe").setExecutor(new PickaxeGiveCommand(itemManager));
+        getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
+
+        registerListeners(
+                new BlockBreakListener(itemManager),
+                new EntityDeathListener(levelManager, itemManager),
+                new PlayerInteractListener(levelManager, effectManager, itemManager, locationManager)
+        );
+
     }
 
     public void onDisable() {
@@ -47,21 +59,6 @@ public final class SigmaEvolutions extends JavaPlugin {
         InventoryManager.enable(this);
         getLogger().info("Dependências carregadas.");
 
-        itemManager = new ItemManager(this);
-        levelManager = new LevelManager(this);
-        locationManager = new LocationManager(this, getConfig());
-        effectManager = new EffectManager(this, locationManager);
-        levelManager.loadPickaxeLevels();
-        levelManager.loadSwordLevels();
-
-        getCommand("pickaxe").setExecutor(new PickaxeGiveCommand(itemManager));
-        getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
-        registerListeners(
-                new BlockBreakListener(levelManager, this, itemManager),
-                new EntityDeathListener(levelManager, itemManager),
-                new PlayerInteractListener(levelManager, effectManager, itemManager, locationManager)
-        );
-
     }
 
     private void registerListeners(Listener... listeners) {
@@ -70,4 +67,19 @@ public final class SigmaEvolutions extends JavaPlugin {
         }
     }
 
+    private void loadManagers() {
+
+        locationManager = new LocationManager(this);
+        effectManager = new EffectManager(this, locationManager);
+        itemManager = new ItemManager(this);
+        levelManager = new LevelManager(this);
+
+        runnable = new EffectRunnable(this, effectManager, locationManager);
+
+        levelManager.loadPickaxeLevels();
+        levelManager.loadSwordLevels();
+
+        effectManager.startTask();
+
+    }
 }

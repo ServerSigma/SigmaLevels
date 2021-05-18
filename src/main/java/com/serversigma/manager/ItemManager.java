@@ -65,13 +65,8 @@ public class ItemManager {
         ItemMeta itemMeta = itemStack.getItemMeta();
         NBTItem nbtItem = new NBTItem(itemStack);
 
-        int blocks = (nbtItem.getInteger("blocksBreaked")
-                == null ? 0 : nbtItem.getInteger("blocksBreaked"));
-        nbtItem.setInteger("blocksBreaked", blocks + 1);
-
-        String displayName = "".replace("&", "§");
-
-        itemMeta.setDisplayName(displayName + "§7 (" + blocks + ")");
+        int blocks = nbtItem.getInteger("blocksBreaked");
+        itemMeta.setDisplayName("§eSuper Picareta §8» §7" + (blocks + 1));
         itemStack.setItemMeta(itemMeta);
         nbtItem.applyNBT(itemStack);
     }
@@ -93,14 +88,9 @@ public class ItemManager {
     public void updateSword(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         NBTItem nbtItem = new NBTItem(itemStack);
-        int entitys = (nbtItem.getInteger("entityKilled") == null ? 0 : nbtItem.getInteger("entityKilled"));
 
-        nbtItem.setInteger("entityKilled", entitys + 1);
-
-        String displayName = "".replace("&", "§");
-
-        itemMeta.setDisplayName(displayName + "§7 (" + entitys + ")");
-
+        int entitys = nbtItem.getInteger("entityKilled");
+        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
         itemStack.setItemMeta(itemMeta);
         nbtItem.applyNBT(itemStack);
     }
