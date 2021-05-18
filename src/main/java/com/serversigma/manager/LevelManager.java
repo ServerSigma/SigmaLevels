@@ -21,18 +21,18 @@ public class LevelManager {
 
     public void loadPickaxeLevels() {
         pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯§f✯✯✯✯", 10, 6, 4, 4));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯§f✯✯✯", 10, 7, 5, 5));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯§f✯✯", 10, 8, 6, 6));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯§f✯", 10, 9, 7, 7));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯✯", 10, 10, 8, 8));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯§f✯✯✯", 20, 7, 5, 5));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯§f✯✯", 30, 8, 6, 6));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯§f✯", 40, 9, 7, 7));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯✯", 50, 10, 8, 8));
     }
 
     public void loadSwordLevels() {
-        swordLevels.add(new SwordLevel("§eEspada: §6✯§f✯✯✯✯", 1, 6, 4, 4));
-        swordLevels.add(new SwordLevel("§eEspada: §6✯✯§f✯✯✯", 2, 7, 5, 5));
-        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯§f✯✯", 3, 8, 6, 6));
-        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯✯§f✯", 4, 9, 7, 7));
-        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯✯✯", 5, 10, 8, 8));
+        swordLevels.add(new SwordLevel("§eEspada: §6✯§f✯✯✯✯", 2, 6, 4, 4));
+        swordLevels.add(new SwordLevel("§eEspada: §6✯✯§f✯✯✯", 4, 7, 5, 5));
+        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯§f✯✯", 6, 8, 6, 6));
+        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯✯§f✯", 8, 9, 7, 7));
+        swordLevels.add(new SwordLevel("§eEspada: §6✯✯✯✯✯", 10, 10, 8, 8));
     }
 
     public PickaxeLevel getPickaxeLevelByBlocks(int blocks) {

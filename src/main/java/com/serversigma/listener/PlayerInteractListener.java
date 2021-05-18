@@ -29,6 +29,7 @@ public class PlayerInteractListener implements Listener {
 
         if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
 
+        Player p = e.getPlayer();
         ItemStack item = e.getItem();
         if (item == null) return;
 
@@ -45,6 +46,7 @@ public class PlayerInteractListener implements Listener {
             e.setCancelled(true);
             locationManager.setTableLocation(e.getClickedBlock().getLocation());
             effectManager.startTask();
+            p.sendMessage("§a[SigmaEvolutions] Você definiu uma mesa especial com sucesso!");
         }
 
         ItemStack itemStack = p.getItemInHand();
