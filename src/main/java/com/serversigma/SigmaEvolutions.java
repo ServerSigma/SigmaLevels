@@ -34,7 +34,7 @@ public final class SigmaEvolutions extends JavaPlugin {
         getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
 
         registerListeners(
-                new BlockBreakListener(itemManager),
+                new BlockBreakListener(effectManager),
                 new EntityDeathListener(levelManager, itemManager),
                 new PlayerInteractListener(levelManager, effectManager, itemManager, locationManager)
         );

@@ -1,7 +1,6 @@
 package com.serversigma.listener;
 
-import com.serversigma.manager.ItemManager;
-import com.serversigma.manager.LevelManager;
+import com.serversigma.manager.EffectManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
@@ -9,20 +8,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 @RequiredArgsConstructor
 public class BlockBreakListener implements Listener {
 
-    private final ItemManager itemManager;
+    private final EffectManager effectManager;
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreak(BlockBreakEvent e) {
+
+        if (e.getBlock().getType().name().equals("ENCHANTMENT_TABLE")) effectManager.stopTask();
 
         Player p = e.getPlayer();
 

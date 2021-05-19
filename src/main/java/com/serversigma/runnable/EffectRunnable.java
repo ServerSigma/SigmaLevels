@@ -23,6 +23,7 @@ public class EffectRunnable {
             }
         }.runTaskTimerAsynchronously(plugin, 15, 15);
     }
+
     public void stop() {
         runnable.cancel();
     }
