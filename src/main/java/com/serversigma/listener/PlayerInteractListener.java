@@ -34,8 +34,12 @@ public class PlayerInteractListener implements Listener {
         if (!(
                 item.getType().name().equals("DIAMOND_SWORD")
                         || item.getType().name().equals("BLAZE_ROD")
-                        || item.getType().name().equals("DIAMOND_PICKAXE")
-        )) return;
+                        || item.getType().name().equals("DIAMOND_PICKAXE"))
+                && e.getClickedBlock().getLocation().equals(locationManager.getTableLocation())) {
+            p.sendMessage("§7Você precisa abrir a mesa utilizando um item especial.");
+            e.setCancelled(true);
+            return;
+        }
 
         if (item.getType().name().equals("BLAZE_ROD")
                 && e.getPlayer().hasPermission("sigmaevolutions.define.table")
@@ -44,31 +48,30 @@ public class PlayerInteractListener implements Listener {
             e.setCancelled(true);
             locationManager.setTableLocation(e.getClickedBlock().getLocation());
             effectManager.startTask();
+            return;
         }
 
         ItemStack itemStack = p.getItemInHand();
         NBTItem nbtItem = new NBTItem(itemStack);
         if (!nbtItem.hasNBTData()) return;
 
-        if (e.getItem().getType().name().equals("DIAMOND_SWORD")
-                && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
-            e.setCancelled(true);
+        if (e.getClickedBlock().getLocation().equals(locationManager.getTableLocation())) {
+            if (e.getItem().getType().name().equals("DIAMOND_SWORD")) {
+                e.setCancelled(true);
 
-            if (nbtItem.getInteger("entityKilled") >= 0) {
-                SwordInventory swordInventory = new SwordInventory(levelManager, p, itemManager);
-                swordInventory.openInventory(p);
-                p.sendMessage("§7Abrindo menu...");
+                if (nbtItem.getInteger("entityKilled") >= 0) {
+                    SwordInventory swordInventory = new SwordInventory(levelManager, p, itemManager);
+                    swordInventory.openInventory(p);
+                }
             }
-        }
 
-        if (e.getItem().getType().name().equals("DIAMOND_PICKAXE")
-                && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
-            e.setCancelled(true);
+            if (e.getItem().getType().name().equals("DIAMOND_PICKAXE")) {
+                e.setCancelled(true);
 
-            if (nbtItem.getInteger("blocksBreaked") >= 0) {
-                PickaxeInventory pickaxeInventory = new PickaxeInventory(levelManager, p, itemManager);
-                pickaxeInventory.openInventory(p);
-                p.sendMessage("§7Abrindo menu...");
+                if (nbtItem.getInteger("blocksBreaked") >= 0) {
+                    PickaxeInventory pickaxeInventory = new PickaxeInventory(levelManager, p, itemManager);
+                    pickaxeInventory.openInventory(p);
+                }
             }
         }
     }

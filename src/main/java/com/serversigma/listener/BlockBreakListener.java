@@ -48,6 +48,6 @@ public class BlockBreakListener implements Listener {
         itemMeta.setDisplayName("§eSuper Picareta §8» §7" + (blocks + 1));
         itemStack.setItemMeta(itemMeta);
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 1, 60));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 60, 1));
     }
 }
