@@ -3,7 +3,6 @@ package com.serversigma.manager;
 import com.serversigma.model.PickaxeLevel;
 import com.serversigma.model.SwordLevel;
 import com.serversigma.utilitie.ItemComposer;
-import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -11,15 +10,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
-import java.util.List;
 
 @RequiredArgsConstructor
 public class ItemManager {
-
-    private final Plugin plugin;
 
     public void giveSword(Player player) {
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
@@ -55,21 +50,10 @@ public class ItemManager {
                 .setNBT("blocksBreaked", 0)
                 .build();
         player.getInventory().addItem(itemStack);
-
-    }
-
-    public void updatePickaxe(ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        NBTItem nbtItem = new NBTItem(itemStack);
-        int blocks = nbtItem.getInteger("blocksBreaked");
-        itemMeta.setDisplayName("§eSuper Picareta §8» §7" + (blocks + 1));
-        itemStack.setItemMeta(itemMeta);
-        nbtItem.applyNBT(itemStack);
     }
 
     public ItemMeta upgradePickaxe(ItemStack itemStack, PickaxeLevel pickaxeLevel) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-
         itemMeta.addEnchant(Enchantment.DIG_SPEED, pickaxeLevel.getEfficiencyLevel(), true);
         itemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, pickaxeLevel.getFortuneLevel(), true);
         itemMeta.addEnchant(Enchantment.DURABILITY, pickaxeLevel.getUnbreakingLevel(), true);
@@ -79,12 +63,12 @@ public class ItemManager {
                 "§7Fortuna: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS),
                 "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
         ));
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
       return itemMeta;
     }
 
-    public void upgradeSword(ItemStack itemStack, SwordLevel swordLevel) {
+    public ItemMeta upgradeSword(ItemStack itemStack, SwordLevel swordLevel) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-
         itemMeta.addEnchant(Enchantment.DAMAGE_ALL, swordLevel.getSharpnessLevel(), true);
         itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, swordLevel.getLootingLevel(), true);
         itemMeta.addEnchant(Enchantment.DURABILITY, swordLevel.getUnbreakingLevel(), true);
@@ -94,7 +78,7 @@ public class ItemManager {
                 "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
                 "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
         ));
-        itemStack.setItemMeta(itemMeta);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        return itemMeta;
     }
-
 }

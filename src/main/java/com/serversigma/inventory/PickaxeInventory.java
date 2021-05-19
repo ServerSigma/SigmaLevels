@@ -28,8 +28,8 @@ public class PickaxeInventory extends PagedInventory {
 
     public PickaxeInventory(LevelManager levelManager, Player player, ItemManager itemManager) {
         super(
-                "sigmaevolutions.sword2",
-                "§7Menu de espadas",
+                "sigmaevolutions.pickaxe",
+                "§7Menu de picaretas",
                 27
         );
         this.levelManager = levelManager;
@@ -41,27 +41,28 @@ public class PickaxeInventory extends PagedInventory {
     protected List<InventoryItemSupplier> createPageItems(PagedViewer viewer) {
 
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
-        Collection<PickaxeLevel> swordLevelCollection = levelManager.getPickaxeLevels();
+        Collection<PickaxeLevel> pickaxeLevels = levelManager.getPickaxeLevels();
 
         ItemStack emptySlot = new ItemStack(Material.AIR);
         itemSuppliers.add(() -> InventoryItem.of(emptySlot));
 
-        for (PickaxeLevel level : swordLevelCollection) {
+        for (PickaxeLevel level : pickaxeLevels) {
 
             ItemStack itemInHand = player.getItemInHand();
             NBTItem nbtItem = new NBTItem(itemInHand);
 
             int blocks = nbtItem.getInteger("blocksBreaked");
+            int remaningBlocks = level.getBlocks() - blocks;
 
-            int remaningBlocks = (level.getBlocks() - nbtItem.getInteger("blocksBreaked"));
-
-            String lore = (blocks >= level.getBlocks() && itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) < level.getEfficiencyLevel()
+            String lore = (blocks >= level.getBlocks()
+                    && itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) < level.getEfficiencyLevel()
                     ? "§aClique aqui para evoluir sua picareta."
-
                     : "§cFaltam §7" + remaningBlocks + " §cblocos para evoluir sua picareta.");
+
             if (itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) >= level.getEfficiencyLevel()) {
                 lore = "§bVocê já evoluiu sua picareta para esse nível.";
             }
+
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                     .setName(level.getName())
                     .setLore(
@@ -84,18 +85,17 @@ public class PickaxeInventory extends PagedInventory {
 
                         if (itemInHand.getEnchantmentLevel(Enchantment.DIG_SPEED) >= level.getEfficiencyLevel()) {
                             player.playSound(player.getLocation(), Sound.NOTE_BASS, 1, 1);
-                            player.sendMessage("§cOps, sua espada já tem um encantamento superior.");
+                            player.sendMessage("§cOps, sua picareta já tem um encantamento superior.");
                             return;
                         }
 
-                        PickaxeLevel swordLevel = levelManager.getPickaxeNextLevel(level.getBlocks());
+                        PickaxeLevel pickaxeLevel = levelManager.getPickaxeNextLevel(level.getBlocks());
+                        player.getItemInHand().setItemMeta(itemManager.upgradePickaxe(itemInHand, pickaxeLevel));
 
-                        player.getItemInHand().setItemMeta(itemManager.upgradePickaxe(itemInHand, swordLevel));
-
-                        player.sendMessage("§aVocê evoluiu sua espada para " + level.getName());
+                        player.sendMessage("§aVocê evoluiu sua picareta para " + level.getName());
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
                         player.sendTitle("§a§lLEVEL UP!", level.getName());
-                        player.getOpenInventory().close();
+                        player.closeInventory();
                     })
             );
         }

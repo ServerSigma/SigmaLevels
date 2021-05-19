@@ -41,12 +41,12 @@ public class SwordInventory extends PagedInventory {
     protected List<InventoryItemSupplier> createPageItems(PagedViewer viewer) {
 
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
-        Collection<SwordLevel> swordLevelCollection = levelManager.getSwordLevels();
+        Collection<SwordLevel> swordLevels = levelManager.getSwordLevels();
 
         ItemStack emptySlot = new ItemStack(Material.AIR);
         itemSuppliers.add(() -> InventoryItem.of(emptySlot));
 
-        for (SwordLevel level : swordLevelCollection) {
+        for (SwordLevel level : swordLevels) {
 
             ItemStack itemInHand = player.getItemInHand();
             NBTItem nbtItem = new NBTItem(itemInHand);
@@ -54,10 +54,11 @@ public class SwordInventory extends PagedInventory {
             int entity = nbtItem.getInteger("entityKilled");
             int remaingEntitys = (level.getEntitys() - nbtItem.getInteger("entityKilled"));
 
-            String lore = (entity >= level.getEntitys() && itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) < level.getSharpnessLevel()
+            String lore = (entity >= level.getEntitys()
+                    && itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) < level.getSharpnessLevel()
                     ? "§aClique aqui para evoluir sua espada."
-
                     : "§cFaltam §7" + remaingEntitys + " §centidades para evoluir sua espada.");
+
             if (itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) >= level.getSharpnessLevel()) {
                 lore = "§bVocê já evoluiu sua espada para esse nível.";
             }
@@ -90,12 +91,12 @@ public class SwordInventory extends PagedInventory {
                         }
 
                         SwordLevel swordLevel = levelManager.getSwordNextLevel(level.getEntitys());
+                        itemInHand.setItemMeta(itemManager.upgradeSword(itemInHand, swordLevel));
 
-                        itemManager.upgradeSword(itemInHand, swordLevel);
+                        player.closeInventory();
                         player.sendMessage("§aVocê evoluiu sua espada para " + level.getName());
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
                         player.sendTitle("§a§lLEVEL UP!", level.getName());
-                        updateInventory(player);
                     })
             );
         }

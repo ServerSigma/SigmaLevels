@@ -25,12 +25,13 @@ public class EffectRunnable {
     }
 
     public void stop() {
-        runnable.cancel();
+        try {
+            runnable.cancel();
+        } catch (NullPointerException ignored) {}
     }
 
     public void restart() {
         stop();
         start();
     }
-
 }

@@ -10,7 +10,6 @@ import com.serversigma.manager.EffectManager;
 import com.serversigma.manager.ItemManager;
 import com.serversigma.manager.LevelManager;
 import com.serversigma.manager.LocationManager;
-import com.serversigma.runnable.EffectRunnable;
 import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -34,11 +33,10 @@ public final class SigmaEvolutions extends JavaPlugin {
         getCommand("sword").setExecutor(new SwordGiveCommand(itemManager));
 
         registerListeners(
-                new BlockBreakListener(effectManager),
-                new EntityDeathListener(levelManager, itemManager),
+                new BlockBreakListener(effectManager, locationManager),
+                new EntityDeathListener(),
                 new PlayerInteractListener(levelManager, effectManager, itemManager, locationManager)
         );
-
     }
 
     @Override
@@ -68,10 +66,9 @@ public final class SigmaEvolutions extends JavaPlugin {
     }
 
     private void loadManagers() {
-
         locationManager = new LocationManager(this);
         effectManager = new EffectManager(this, locationManager);
-        itemManager = new ItemManager(this);
+        itemManager = new ItemManager();
         levelManager = new LevelManager(this);
 
         levelManager.loadPickaxeLevels();

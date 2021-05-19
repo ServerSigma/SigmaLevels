@@ -8,7 +8,6 @@ import com.serversigma.manager.LevelManager;
 import com.serversigma.manager.LocationManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,7 +50,6 @@ public class PlayerInteractListener implements Listener {
         NBTItem nbtItem = new NBTItem(itemStack);
         if (!nbtItem.hasNBTData()) return;
 
-
         if (e.getItem().getType().name().equals("DIAMOND_SWORD")
                 && e.getClickedBlock().getType().name().equalsIgnoreCase("ENCHANTMENT_TABLE")) {
             e.setCancelled(true);
@@ -73,7 +71,5 @@ public class PlayerInteractListener implements Listener {
                 p.sendMessage("§7Abrindo menu...");
             }
         }
-
     }
-
 }

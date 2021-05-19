@@ -34,4 +34,8 @@ public class LocationManager {
         plugin.saveConfig();
         this.location = location;
     }
+
+    public boolean tableIsNotBreaked() {
+        return getTableLocation().getBlock().getType().name().equals("ENCHANTMENT_TABLE");
+    }
 }

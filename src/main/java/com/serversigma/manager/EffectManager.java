@@ -14,15 +14,11 @@ public class EffectManager {
     private final LocationManager locationManager;
 
     public void startTask() {
-        if (locationManager.getTableLocation().getBlock().getType().name().equals("ENCHANTMENT_TABLE")) {
-            effectRunnable.start();
-            return;
-        }
         if (effectRunnable == null) {
             effectRunnable = new EffectRunnable(plugin, this, locationManager);
-            effectRunnable.start();
+            if (locationManager.tableIsNotBreaked()) effectRunnable.start();
         } else {
-            effectRunnable.restart();
+            if (locationManager.tableIsNotBreaked()) effectRunnable.restart();
         }
     }
 
