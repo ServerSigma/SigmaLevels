@@ -45,7 +45,6 @@ public class PlayerInteractListener implements Listener {
             e.setCancelled(true);
             locationManager.setTableLocation(e.getClickedBlock().getLocation());
             effectManager.startTask();
-            p.sendMessage("§a[SigmaEvolutions] Você definiu uma mesa especial com sucesso!");
         }
 
         ItemStack itemStack = p.getItemInHand();

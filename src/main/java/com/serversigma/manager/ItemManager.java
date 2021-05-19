@@ -14,15 +14,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class ItemManager {
 
     private final Plugin plugin;
 
-
     public void giveSword(Player player) {
-
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
                 .setName("§eSuper Espada")
                 .addEnchantment(Enchantment.DAMAGE_ALL, 5)
@@ -38,11 +37,9 @@ public class ItemManager {
                 .setNBT("entityKilled", 0)
                 .build();
         player.getInventory().addItem(itemStack);
-
     }
 
     public void givePickaxe(Player player) {
-
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                 .setName("§eSuper Picareta")
                 .addEnchantment(Enchantment.DIG_SPEED, 5)
@@ -64,57 +61,39 @@ public class ItemManager {
     public void updatePickaxe(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         NBTItem nbtItem = new NBTItem(itemStack);
-
         int blocks = nbtItem.getInteger("blocksBreaked");
         itemMeta.setDisplayName("§eSuper Picareta §8» §7" + (blocks + 1));
         itemStack.setItemMeta(itemMeta);
         nbtItem.applyNBT(itemStack);
     }
 
-    public void upgradePickaxe(ItemStack itemStack, PickaxeLevel level) {
+    public ItemMeta upgradePickaxe(ItemStack itemStack, PickaxeLevel pickaxeLevel) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        int efficiencyLevel = level.getEfficiencyLevel();
-        int fortuneLevel = level.getFortuneLevel();
-        int unbreakingLevel = level.getUnbreakingLevel();
-        itemMeta.addEnchant(Enchantment.DIG_SPEED, efficiencyLevel, true);
-        itemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, fortuneLevel, true);
-        itemMeta.addEnchant(Enchantment.DURABILITY, unbreakingLevel, true);
 
-//        List<String> lore = configManager.getPickaxeLore(itemMeta);
-//        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-    }
-
-    public void updateSword(ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        NBTItem nbtItem = new NBTItem(itemStack);
-
-        int entitys = nbtItem.getInteger("entityKilled");
-        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
-        itemStack.setItemMeta(itemMeta);
-        nbtItem.applyNBT(itemStack);
+        itemMeta.addEnchant(Enchantment.DIG_SPEED, pickaxeLevel.getEfficiencyLevel(), true);
+        itemMeta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, pickaxeLevel.getFortuneLevel(), true);
+        itemMeta.addEnchant(Enchantment.DURABILITY, pickaxeLevel.getUnbreakingLevel(), true);
+        itemMeta.setLore(Arrays.asList(
+                "",
+                "§7Eficiência: §b" + itemMeta.getEnchantLevel(Enchantment.DIG_SPEED),
+                "§7Fortuna: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS),
+                "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
+        ));
+      return itemMeta;
     }
 
     public void upgradeSword(ItemStack itemStack, SwordLevel swordLevel) {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        int sharpnessLevel = swordLevel.getSharpnessLevel();
-        int lootingLevel = swordLevel.getLootingLevel();
-        int unbreakingLevel = swordLevel.getUnbreakingLevel();
-        itemMeta.addEnchant(Enchantment.DAMAGE_ALL, sharpnessLevel, true);
-        itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, lootingLevel, true);
-        itemMeta.addEnchant(Enchantment.DURABILITY, unbreakingLevel, true);
-
+        itemMeta.addEnchant(Enchantment.DAMAGE_ALL, swordLevel.getSharpnessLevel(), true);
+        itemMeta.addEnchant(Enchantment.LOOT_BONUS_MOBS, swordLevel.getLootingLevel(), true);
+        itemMeta.addEnchant(Enchantment.DURABILITY, swordLevel.getUnbreakingLevel(), true);
         itemMeta.setLore(Arrays.asList(
                 "",
-                "§7Afiação: §b" + sharpnessLevel,
-                "§7Pilhagem: §b" + lootingLevel,
-                "§7Inquebrável: §b" + unbreakingLevel
+                "§7Afiação: §b" + itemMeta.getEnchantLevel(Enchantment.DAMAGE_ALL),
+                "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
+                "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
         ));
-
-//        List<String> lore = configManager.getSwordLore(itemMeta);
-//        itemMeta.setLore(lore);
-
         itemStack.setItemMeta(itemMeta);
     }
 
