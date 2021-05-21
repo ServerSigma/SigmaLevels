@@ -1,4 +1,4 @@
-package com.serversigma.listener;
+package com.serversigma.sigmaevolutions.listener;
 
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;

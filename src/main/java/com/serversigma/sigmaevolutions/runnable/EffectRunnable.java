@@ -1,7 +1,7 @@
-package com.serversigma.runnable;
+package com.serversigma.sigmaevolutions.runnable;
 
-import com.serversigma.manager.EffectManager;
-import com.serversigma.manager.LocationManager;
+import com.serversigma.sigmaevolutions.manager.EffectManager;
+import com.serversigma.sigmaevolutions.manager.LocationManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;

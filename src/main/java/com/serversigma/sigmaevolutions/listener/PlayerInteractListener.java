@@ -1,11 +1,11 @@
-package com.serversigma.listener;
+package com.serversigma.sigmaevolutions.listener;
 
-import com.serversigma.inventory.PickaxeInventory;
-import com.serversigma.inventory.SwordInventory;
-import com.serversigma.manager.EffectManager;
-import com.serversigma.manager.ItemManager;
-import com.serversigma.manager.LevelManager;
-import com.serversigma.manager.LocationManager;
+import com.serversigma.sigmaevolutions.inventory.PickaxeInventory;
+import com.serversigma.sigmaevolutions.inventory.SwordInventory;
+import com.serversigma.sigmaevolutions.manager.EffectManager;
+import com.serversigma.sigmaevolutions.manager.ItemManager;
+import com.serversigma.sigmaevolutions.manager.LevelManager;
+import com.serversigma.sigmaevolutions.manager.LocationManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;

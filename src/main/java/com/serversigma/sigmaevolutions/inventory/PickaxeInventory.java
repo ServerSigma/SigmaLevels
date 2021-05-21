@@ -1,13 +1,13 @@
-package com.serversigma.inventory;
+package com.serversigma.sigmaevolutions.inventory;
 
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.paged.PagedInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
-import com.serversigma.manager.ItemManager;
-import com.serversigma.manager.LevelManager;
-import com.serversigma.model.PickaxeLevel;
-import com.serversigma.utilitie.ItemComposer;
+import com.serversigma.sigmaevolutions.manager.ItemManager;
+import com.serversigma.sigmaevolutions.manager.LevelManager;
+import com.serversigma.sigmaevolutions.model.PickaxeLevel;
+import com.serversigma.sigmaevolutions.utilitie.ItemComposer;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -67,8 +67,8 @@ public class PickaxeInventory extends PagedInventory {
                     .setName(level.getName())
                     .setLore(
                             "§r",
-                            "§7Afiação3: §b" + level.getEfficiencyLevel(),
-                            "§7Pilhagem3: §b" + level.getFortuneLevel(),
+                            "§7Eficiência: §b" + level.getEfficiencyLevel(),
+                            "§7Fortuna: §b" + level.getFortuneLevel(),
                             "§7Inquebrável: §b" + level.getUnbreakingLevel(),
                             "",
                             lore

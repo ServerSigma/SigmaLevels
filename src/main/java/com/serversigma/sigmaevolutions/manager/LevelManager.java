@@ -1,7 +1,7 @@
-package com.serversigma.manager;
+package com.serversigma.sigmaevolutions.manager;
 
-import com.serversigma.model.PickaxeLevel;
-import com.serversigma.model.SwordLevel;
+import com.serversigma.sigmaevolutions.model.PickaxeLevel;
+import com.serversigma.sigmaevolutions.model.SwordLevel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.plugin.Plugin;
@@ -18,11 +18,16 @@ public class LevelManager {
     private final List<PickaxeLevel> pickaxeLevels = new ArrayList<>();
 
     public void loadPickaxeLevels() {
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯§f✯✯✯✯", 1000, 6, 4, 4));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯§f✯✯✯", 3000, 7, 5, 5));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯§f✯✯", 8000, 8, 6, 6));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯§f✯", 18000, 9, 7, 7));
-        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯✯", 35000, 10, 8, 8));
+//        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯§f✯✯✯✯", 1000, 6, 4, 4));
+//        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯§f✯✯✯", 3000, 7, 5, 5));
+//        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯§f✯✯", 8000, 8, 6, 6));
+//        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯§f✯", 18000, 9, 7, 7));
+//        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯✯", 35000, 10, 8, 8));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯§f✯✯✯✯", 1000 / 5, 6, 4, 4));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯§f✯✯✯", 3000 / 5, 7, 5, 5));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯§f✯✯", 8000 / 5, 8, 6, 6));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯§f✯", 18000 / 5, 9, 7, 7));
+        pickaxeLevels.add(new PickaxeLevel("§ePicareta: §6✯✯✯✯✯", 35000 / 5, 10, 8, 8));
     }
 
     public void loadSwordLevels() {

@@ -1,6 +1,6 @@
-package com.serversigma.command;
+package com.serversigma.sigmaevolutions.command;
 
-import com.serversigma.manager.ItemManager;
+import com.serversigma.sigmaevolutions.manager.ItemManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,7 +9,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 @RequiredArgsConstructor
-public class SwordGiveCommand implements CommandExecutor {
+public class PickaxeGiveCommand implements CommandExecutor {
 
     private final ItemManager itemManager;
 
@@ -20,7 +20,6 @@ public class SwordGiveCommand implements CommandExecutor {
             sender.sendMessage("§cO console não pode executar esse comando.");
             return true;
         }
-
         Player p = (Player) sender;
 
         int slot = p.getInventory().firstEmpty();
@@ -29,9 +28,8 @@ public class SwordGiveCommand implements CommandExecutor {
             return false;
         }
 
-        itemManager.giveSword(p);
-        p.sendMessage("§a[SigmaEvolutions] Você pegou uma espada com sucesso.");
+        itemManager.givePickaxe(p);
+        p.sendMessage("§a[SigmaEvolutions] Você pegou uma picareta com sucesso.");
         return false;
     }
 }
-

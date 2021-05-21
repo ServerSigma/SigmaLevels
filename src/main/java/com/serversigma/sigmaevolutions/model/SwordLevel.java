@@ -1,4 +1,4 @@
-package com.serversigma.model;
+package com.serversigma.sigmaevolutions.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

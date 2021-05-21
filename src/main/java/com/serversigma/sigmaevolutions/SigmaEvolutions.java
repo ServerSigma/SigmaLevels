@@ -1,15 +1,15 @@
-package com.serversigma;
+package com.serversigma.sigmaevolutions;
 
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
-import com.serversigma.command.PickaxeGiveCommand;
-import com.serversigma.command.SwordGiveCommand;
-import com.serversigma.listener.BlockBreakListener;
-import com.serversigma.listener.EntityDeathListener;
-import com.serversigma.listener.PlayerInteractListener;
-import com.serversigma.manager.EffectManager;
-import com.serversigma.manager.ItemManager;
-import com.serversigma.manager.LevelManager;
-import com.serversigma.manager.LocationManager;
+import com.serversigma.sigmaevolutions.command.PickaxeGiveCommand;
+import com.serversigma.sigmaevolutions.command.SwordGiveCommand;
+import com.serversigma.sigmaevolutions.listener.BlockBreakListener;
+import com.serversigma.sigmaevolutions.listener.EntityDeathListener;
+import com.serversigma.sigmaevolutions.listener.PlayerInteractListener;
+import com.serversigma.sigmaevolutions.manager.EffectManager;
+import com.serversigma.sigmaevolutions.manager.ItemManager;
+import com.serversigma.sigmaevolutions.manager.LevelManager;
+import com.serversigma.sigmaevolutions.manager.LocationManager;
 import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;

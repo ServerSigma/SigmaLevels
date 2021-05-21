@@ -1,8 +1,8 @@
-package com.serversigma.manager;
+package com.serversigma.sigmaevolutions.manager;
 
-import com.serversigma.model.PickaxeLevel;
-import com.serversigma.model.SwordLevel;
-import com.serversigma.utilitie.ItemComposer;
+import com.serversigma.sigmaevolutions.model.PickaxeLevel;
+import com.serversigma.sigmaevolutions.model.SwordLevel;
+import com.serversigma.sigmaevolutions.utilitie.ItemComposer;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

@@ -1,7 +1,7 @@
 name: SigmaEvolutions
 version: @version@
 authors: [DevTuca, DevKeni]
-main: com.serversigma.SigmaEvolutions
+main: com.serversigma.sigmaevolutions.SigmaEvolutions
 
 commands:
   pickaxe:

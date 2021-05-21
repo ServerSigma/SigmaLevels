@@ -1,7 +1,7 @@
-package com.serversigma.listener;
+package com.serversigma.sigmaevolutions.listener;
 
-import com.serversigma.manager.EffectManager;
-import com.serversigma.manager.LocationManager;
+import com.serversigma.sigmaevolutions.manager.EffectManager;
+import com.serversigma.sigmaevolutions.manager.LocationManager;
 import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;

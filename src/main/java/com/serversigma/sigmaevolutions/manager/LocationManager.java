@@ -1,4 +1,4 @@
-package com.serversigma.manager;
+package com.serversigma.sigmaevolutions.manager;
 
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
