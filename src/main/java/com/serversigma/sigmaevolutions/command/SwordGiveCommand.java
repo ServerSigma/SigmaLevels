@@ -29,9 +29,22 @@ public class SwordGiveCommand implements CommandExecutor {
             return false;
         }
 
-        itemManager.giveSword(p);
+        if (args.length != 1) {
+            p.sendMessage("§cUso incorreto, utilize §7/espada [entidades]");
+            return true;
+        }
+
+        int entities;
+
+        try {
+            entities = Integer.parseInt(args[0].replaceAll("[^0-9]", ""));
+        } catch (Exception e) {
+            p.sendMessage("§cA quantidade inserida é inválida.");
+            return true;
+        }
+
+        itemManager.giveSword(p, entities);
         p.sendMessage("§a[SigmaEvolutions] Você pegou uma espada com sucesso.");
-        return false;
+        return true;
     }
 }
-

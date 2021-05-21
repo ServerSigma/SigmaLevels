@@ -16,12 +16,12 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class ItemManager {
 
-    public void giveSword(Player player) {
+    public void giveSword(Player player, int entities) {
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
                 .setName("§eSuper Espada")
-                .addEnchantment(Enchantment.DAMAGE_ALL, 5)
-                .addEnchantment(Enchantment.LOOT_BONUS_MOBS, 3)
-                .addEnchantment(Enchantment.DURABILITY, 3)
+//                .addEnchantment(Enchantment.DAMAGE_ALL, 1)
+//                .addEnchantment(Enchantment.LOOT_BONUS_MOBS, 1)
+//                .addEnchantment(Enchantment.DURABILITY, 1)
                 .addItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .composeMeta(itemMeta -> itemMeta.setLore(Arrays.asList(
                         "",
@@ -29,12 +29,12 @@ public class ItemManager {
                         "§7Pilhagem: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_MOBS),
                         "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
-                .setNBT("entityKilled", 0)
+                .setNBT("entityKilled", entities)
                 .build();
         player.getInventory().addItem(itemStack);
     }
 
-    public void givePickaxe(Player player) {
+    public void givePickaxe(Player player, int blocks) {
         ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                 .setName("§eSuper Picareta")
                 .addEnchantment(Enchantment.DIG_SPEED, 5)
@@ -47,7 +47,7 @@ public class ItemManager {
                         "§7Fortuna: §b" + itemMeta.getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS),
                         "§7Inquebrável: §b" + itemMeta.getEnchantLevel(Enchantment.DURABILITY)
                 )))
-                .setNBT("blocksBreaked", 0)
+                .setNBT("blocksBreaked", blocks)
                 .build();
         player.getInventory().addItem(itemStack);
     }

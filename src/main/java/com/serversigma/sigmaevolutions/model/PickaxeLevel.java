@@ -1,10 +1,10 @@
 package com.serversigma.sigmaevolutions.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public final class PickaxeLevel {
 
     private final String name;
@@ -12,5 +12,6 @@ public final class PickaxeLevel {
     private final int efficiencyLevel;
     private final int fortuneLevel;
     private final int unbreakingLevel;
+    private final String permission;
 
 }

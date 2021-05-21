@@ -39,15 +39,11 @@ public class ItemComposer {
         return this;
     }
 
-    public ItemComposer setNBT(String key, Integer value) {
+    public ItemComposer setNBT(String key, int value) {
         this.nbtItem = new NBTItem(item);
         nbtItem.setInteger(key, value);
         nbtItem.applyNBT(item);
         return this;
-    }
-
-    public NBTItem toNBT(ItemStack item) {
-        return new NBTItem(item);
     }
 
     public ItemComposer setLore(List<String> lore) {
@@ -56,9 +52,8 @@ public class ItemComposer {
         return this;
     }
 
-    public ItemComposer compose(Consumer<ItemStack> consumer) {
+    public void compose(Consumer<ItemStack> consumer) {
         consumer.accept(item);
-        return this;
     }
 
     public ItemComposer addEnchantment(Enchantment enchantment, int level) {

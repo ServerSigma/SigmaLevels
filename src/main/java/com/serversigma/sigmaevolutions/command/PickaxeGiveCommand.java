@@ -25,11 +25,25 @@ public class PickaxeGiveCommand implements CommandExecutor {
         int slot = p.getInventory().firstEmpty();
         if (slot == -1) {
             p.sendMessage("§c[SigmaEvolutions] Seu inventário precisa estar vazio.");
-            return false;
+            return true;
         }
 
-        itemManager.givePickaxe(p);
+        if (args.length != 1) {
+            p.sendMessage("§cUso incorreto, utilize §7/picareta [blocos]");
+            return true;
+        }
+
+        int blocks;
+
+        try {
+            blocks = Integer.parseInt(args[0].replaceAll("[^0-9]", ""));
+        } catch (Exception e) {
+            p.sendMessage("§cA quantidade inserida é inválida.");
+            return true;
+        }
+
+        itemManager.givePickaxe(p, blocks);
         p.sendMessage("§a[SigmaEvolutions] Você pegou uma picareta com sucesso.");
-        return false;
+        return true;
     }
 }

@@ -30,11 +30,11 @@ public class EntityDeathListener implements Listener {
         NBTItem nbtItem = new NBTItem(itemStack);
         if (!nbtItem.hasNBTData()) return;
 
-        int entitys = nbtItem.getInteger("entityKilled");
-        nbtItem.setInteger("entityKilled", entitys + 1);
+        int entities = nbtItem.getInteger("entityKilled");
+        nbtItem.setInteger("entityKilled", entities + 1);
         nbtItem.applyNBT(itemStack);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entitys + 1));
+        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entities + 1));
         itemStack.setItemMeta(itemMeta);
     }
 }

@@ -30,7 +30,7 @@ public class SwordInventory extends PagedInventory {
         super(
                 "sigmaevolutions.sword",
                 "§7Menu de espadas",
-                27
+                9 * 4
         );
         this.levelManager = levelManager;
         this.player = player;
@@ -40,11 +40,9 @@ public class SwordInventory extends PagedInventory {
     @Override
     protected List<InventoryItemSupplier> createPageItems(PagedViewer viewer) {
 
+        int slots = 0;
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
         Collection<SwordLevel> swordLevels = levelManager.getSwordLevels();
-
-        ItemStack emptySlot = new ItemStack(Material.AIR);
-        itemSuppliers.add(() -> InventoryItem.of(emptySlot));
 
         for (SwordLevel level : swordLevels) {
 
@@ -52,15 +50,19 @@ public class SwordInventory extends PagedInventory {
             NBTItem nbtItem = new NBTItem(itemInHand);
 
             int entity = nbtItem.getInteger("entityKilled");
-            int remaingEntitys = (level.getEntitys() - nbtItem.getInteger("entityKilled"));
+            int remaingEntities = (level.getEntities() - nbtItem.getInteger("entityKilled"));
 
-            String lore = (entity >= level.getEntitys()
+            String lore = (entity >= level.getEntities()
                     && itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) < level.getSharpnessLevel()
                     ? "§aClique aqui para evoluir sua espada."
-                    : "§cFaltam §7" + remaingEntitys + " §centidades para evoluir sua espada.");
+                    : "§cFaltam §7" + remaingEntities + " §centidades para evoluir sua espada.");
 
             if (itemInHand.getEnchantmentLevel(Enchantment.DAMAGE_ALL) >= level.getSharpnessLevel()) {
                 lore = "§bVocê já evoluiu sua espada para esse nível.";
+            }
+
+            if (!level.getPermission().isEmpty() && !player.hasPermission(level.getPermission())) {
+                lore = "§cVocê não tem permissão para evoluir até esse nível.";
             }
 
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_SWORD)
@@ -78,8 +80,14 @@ public class SwordInventory extends PagedInventory {
             itemSuppliers.add(() -> InventoryItem.of(itemStack).callback(
                     ClickType.LEFT,
                     click -> {
-                        if (remaingEntitys > 0) {
-                            player.sendMessage("§cFalta §7" + remaingEntitys + " §cmonstros para evoluir até esse nível.");
+
+                        if (!level.getPermission().isEmpty() && !player.hasPermission(level.getPermission())) {
+                            player.sendMessage("§cVocê não tem permissão para evoluir até esse nível.");
+                            return;
+                        }
+
+                        if (remaingEntities > 0) {
+                            player.sendMessage("§cFalta §7" + remaingEntities + " §cmonstros para evoluir até esse nível.");
                             player.playSound(player.getLocation(), Sound.NOTE_BASS, 1, 1);
                             return;
                         }
@@ -90,7 +98,7 @@ public class SwordInventory extends PagedInventory {
                             return;
                         }
 
-                        SwordLevel swordLevel = levelManager.getSwordNextLevel(level.getEntitys());
+                        SwordLevel swordLevel = levelManager.getSwordNextLevel(level.getEntities());
                         itemInHand.setItemMeta(itemManager.upgradeSword(itemInHand, swordLevel));
 
                         player.closeInventory();
@@ -99,6 +107,14 @@ public class SwordInventory extends PagedInventory {
                         player.sendTitle("§a§lLEVEL UP!", level.getName());
                     })
             );
+            slots++;
+
+            if (slots % 7 == 0) {
+                for (int i = 0;i < 2;i++) {
+                    ItemStack emptySlot = new ItemStack(Material.AIR);
+                    itemSuppliers.add(() -> InventoryItem.of(emptySlot));
+                }
+            }
         }
         return itemSuppliers;
     }

@@ -43,9 +43,6 @@ public class PickaxeInventory extends PagedInventory {
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
         Collection<PickaxeLevel> pickaxeLevels = levelManager.getPickaxeLevels();
 
-        ItemStack emptySlot = new ItemStack(Material.AIR);
-        itemSuppliers.add(() -> InventoryItem.of(emptySlot));
-
         for (PickaxeLevel level : pickaxeLevels) {
 
             ItemStack itemInHand = player.getItemInHand();
@@ -63,6 +60,10 @@ public class PickaxeInventory extends PagedInventory {
                 lore = "§bVocê já evoluiu sua picareta para esse nível.";
             }
 
+            if (!level.getPermission().isEmpty() && !player.hasPermission(level.getPermission())) {
+                lore = "§cVocê não tem permissão para evoluir até esse nível.";
+            }
+
             ItemStack itemStack = new ItemComposer(Material.DIAMOND_PICKAXE)
                     .setName(level.getName())
                     .setLore(
@@ -78,6 +79,12 @@ public class PickaxeInventory extends PagedInventory {
             itemSuppliers.add(() -> InventoryItem.of(itemStack).callback(
                     ClickType.LEFT,
                     click -> {
+
+                        if (!level.getPermission().isEmpty() && !player.hasPermission(level.getPermission())) {
+                            player.sendMessage("§cVocê não tem permissão para evoluir até esse nível.");
+                            return;
+                        }
+
                         if (blocks < level.getBlocks()) {
                             player.sendMessage("§cFaltam §7" + remaningBlocks + " §cblocos para evoluir sua picareta.");
                             return;
