@@ -73,6 +73,14 @@ public class PlayerInteractListener implements Listener {
                     pickaxeInventory.openInventory(p);
                 }
             }
+            if (e.getItem().getType().name().equals("a armadura")) {
+                e.setCancelled(true);
+
+                if (nbtItem.getInteger("blocksBreaked") >= 0) {
+                    PickaxeInventory pickaxeInventory = new PickaxeInventory(levelManager, p, itemManager);
+                    pickaxeInventory.openInventory(p);
+                }
+            }
         }
     }
 }
