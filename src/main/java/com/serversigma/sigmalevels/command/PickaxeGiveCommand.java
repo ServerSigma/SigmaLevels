@@ -1,6 +1,7 @@
-package com.serversigma.sigmaevolutions.command;
+package com.serversigma.sigmalevels.command;
 
-import com.serversigma.sigmaevolutions.manager.ItemManager;
+import com.serversigma.sigmalevels.manager.ItemManager;
+import com.serversigma.sigmalevels.model.LevelType;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,26 +25,27 @@ public class PickaxeGiveCommand implements CommandExecutor {
 
         int slot = p.getInventory().firstEmpty();
         if (slot == -1) {
-            p.sendMessage("§c[SigmaEvolutions] Seu inventário precisa estar vazio.");
+            p.sendMessage("§cSeu inventário precisa estar vazio.");
             return true;
         }
 
         if (args.length != 1) {
-            p.sendMessage("§cUso incorreto, utilize §7/picareta [blocos]");
+            itemManager.giveItem(p, 0, LevelType.TOOLS_PICKAXE);
+            p.sendMessage("§aVocê pegou uma picareta com sucesso.");
             return true;
         }
 
-        int blocks;
+        double blocks;
 
         try {
-            blocks = Integer.parseInt(args[0].replaceAll("[^0-9]", ""));
+            blocks = Double.parseDouble(args[0].replaceAll("[^0-9]", ""));
         } catch (Exception e) {
             p.sendMessage("§cA quantidade inserida é inválida.");
             return true;
         }
 
-        itemManager.givePickaxe(p, blocks);
-        p.sendMessage("§a[SigmaEvolutions] Você pegou uma picareta com sucesso.");
+        itemManager.giveItem(p, blocks, LevelType.TOOLS_PICKAXE);
+        p.sendMessage("§aVocê pegou uma picareta com sucesso.");
         return true;
     }
 }

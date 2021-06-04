@@ -1,15 +1,21 @@
-name: SigmaEvolutions
+name: SigmaLevels
 version: @version@
 authors: [DevTuca, DevKeni]
-main: com.serversigma.sigmaevolutions.SigmaEvolutions
+depend: [SigmaGems]
+main: com.serversigma.sigmalevels.SigmaLevels
 
 commands:
   pickaxe:
     permission-message: "§cVocê não tem permissão para utilizar esse comando."
-    permission: "sigmaevolutions.pickaxe"
+    permission: "sigmalevels.pickaxe.give"
     aliases: [picareta]
 
   sword:
     aliases: [espada]
     permission-message: "§cVocê não tem permissão para utilizar esse comando."
-    permission: "sigmaevolutions.sword"
+    permission: "sigmalevels.sword.give"
+
+  armor:
+    aliases: [armadura]
+    permission-message: "§cVocê não tem permissão para utilizar esse comando."
+    permission: "sigmalevels.armor.give"

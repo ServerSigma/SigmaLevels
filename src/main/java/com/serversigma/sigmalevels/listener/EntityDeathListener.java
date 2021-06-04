@@ -1,5 +1,6 @@
-package com.serversigma.sigmaevolutions.listener;
+package com.serversigma.sigmalevels.listener;
 
+import com.serversigma.sigmalevels.utilitie.NumberFormat;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,6 +15,7 @@ public class EntityDeathListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreak(EntityDeathEvent e) {
+
         if (e.getEntity() instanceof Player) return;
 
         Player p = e.getEntity().getKiller();
@@ -28,13 +30,17 @@ public class EntityDeathListener implements Listener {
         if (!itemStack.getItemMeta().hasDisplayName()) return;
 
         NBTItem nbtItem = new NBTItem(itemStack);
-        if (!nbtItem.hasNBTData()) return;
+        if (!nbtItem.hasKey("killedEntities")) return;
 
-        int entities = nbtItem.getInteger("entityKilled");
-        nbtItem.setInteger("entityKilled", entities + 1);
+        double entities = nbtItem.getInteger("killedEntities");
+
+        if (entities == Double.MAX_VALUE) return;
+
+        nbtItem.setDouble("killedEntities", entities + 1);
         nbtItem.applyNBT(itemStack);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("§eSuper Espada §8» §7" + (entities + 1));
+        itemMeta.setDisplayName("§bSuper Espada §8» §7" + NumberFormat.format(entities + 1));
         itemStack.setItemMeta(itemMeta);
     }
+
 }

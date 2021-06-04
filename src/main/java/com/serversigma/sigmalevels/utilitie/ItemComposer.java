@@ -1,4 +1,4 @@
-package com.serversigma.sigmaevolutions.utilitie;
+package com.serversigma.sigmalevels.utilitie;
 
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
@@ -7,8 +7,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class ItemComposer {
@@ -39,16 +37,10 @@ public class ItemComposer {
         return this;
     }
 
-    public ItemComposer setNBT(String key, int value) {
+    public ItemComposer setNBT(String key, double value) {
         this.nbtItem = new NBTItem(item);
-        nbtItem.setInteger(key, value);
+        nbtItem.setDouble(key, value);
         nbtItem.applyNBT(item);
-        return this;
-    }
-
-    public ItemComposer setLore(List<String> lore) {
-        if (lore == null || lore.isEmpty() || lore.get(0).equalsIgnoreCase("")) return this;
-        composeMeta(meta -> meta.setLore(lore));
         return this;
     }
 
@@ -59,10 +51,6 @@ public class ItemComposer {
     public ItemComposer addEnchantment(Enchantment enchantment, int level) {
         compose(it -> it.addUnsafeEnchantment(enchantment, level));
         return this;
-    }
-
-    public ItemComposer setLore(String... lore) {
-        return setLore(Arrays.asList(lore));
     }
 
     public ItemStack toItemStack() {

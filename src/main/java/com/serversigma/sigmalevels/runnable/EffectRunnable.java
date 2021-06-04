@@ -1,7 +1,6 @@
-package com.serversigma.sigmaevolutions.runnable;
+package com.serversigma.sigmalevels.runnable;
 
-import com.serversigma.sigmaevolutions.manager.EffectManager;
-import com.serversigma.sigmaevolutions.manager.LocationManager;
+import com.serversigma.sigmalevels.manager.AltarManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,17 +10,17 @@ import org.bukkit.scheduler.BukkitTask;
 public class EffectRunnable {
 
     private final Plugin plugin;
-    private final EffectManager effectManager;
-    private final LocationManager locationManager;
+    private final AltarManager altarManager;
+
     private BukkitTask runnable;
 
     public void start() {
         runnable = new BukkitRunnable() {
             @Override
             public void run() {
-                effectManager.createHelix(locationManager.getTableLocation());
+                altarManager.playEffect();
             }
-        }.runTaskTimerAsynchronously(plugin, 15, 15);
+        }.runTaskTimerAsynchronously(plugin, 20, 20);
     }
 
     public void stop() {
@@ -34,4 +33,5 @@ public class EffectRunnable {
         stop();
         start();
     }
+
 }

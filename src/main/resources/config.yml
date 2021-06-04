@@ -1,5 +1,228 @@
-table:
-  world: Mundo
-  locX: 0.0
-  locY: 0.0
-  locZ: 0.0
+altar:
+  location:
+    ==: org.bukkit.Location
+    world: Mundo_the_end
+    x: -1.0
+    y: 103.0
+    z: -15.0
+    pitch: 0.0
+    yaw: 0.0
+
+armors:
+  ArmorI:
+    name: "Armadura I"
+    price: 25
+    unbreaking: 1
+    protection: 1
+    permission: "grupo.membro"
+
+  ArmorII:
+    name: "Armadura II"
+    price: 50
+    unbreaking: 2
+    protection: 2
+    permission: "grupo.membro"
+
+  ArmorIII:
+    name: "Armadura III"
+    price: 100
+    unbreaking: 3
+    protection: 3
+    permission: "grupo.membro"
+
+  ArmorIV:
+    name: "Armadura IV"
+    price: 200
+    unbreaking: 4
+    protection: 4
+    permission: "grupo.membro"
+
+  ArmorV:
+    name: "Armadura V"
+    price: 500
+    unbreaking: 5
+    protection: 5
+    permission: "grupo.membro"
+
+  ArmorVI:
+    name: "Armadura VI"
+    price: 1200
+    unbreaking: 6
+    protection: 6
+    permission: "grupo.membro"
+
+  ArmorVII:
+    name: "Armadura VII"
+    price: 3600
+    unbreaking: 7
+    protection: 7
+    permission: "grupo.membro"
+
+  ArmorVIII:
+    name: "Armadura VIII"
+    price: 7200
+    unbreaking: 8
+    protection: 8
+    permission: "grupo.membro"
+
+  ArmorIX:
+    name: "Armadura IX"
+    price: 9800
+    unbreaking: 9
+    protection: 9
+    permission: "grupo.vip"
+
+  ArmorX:
+    name: "Armadura X"
+    price: 11900
+    unbreaking: 10
+    protection: 10
+    permission: "grupo.platina"
+
+swords:
+  SwordI:
+    name: "Espada I"
+    price: 25
+    looting: 1
+    sharpness: 1
+    unbreaking: 1
+    fire-aspect: 0
+    permission: "grupo.membro"
+
+  SwordII:
+    name: "Espada II"
+    price: 50
+    looting: 2
+    sharpness: 2
+    unbreaking: 2
+    fire-aspect: 0
+    permission: "grupo.membro"
+
+  SwordIII:
+    name: "Espada III"
+    price: 120
+    looting: 3
+    sharpness: 3
+    unbreaking: 3
+    fire-aspect: 0
+    permission: "grupo.membro"
+
+  SwordIV:
+    name: "Espada IV"
+    price: 240
+    looting: 4
+    sharpness: 4
+    unbreaking: 4
+    fire-aspect: 1
+    permission: "grupo.membro"
+
+  SwordV:
+    name: "Espada V"
+    price: 500
+    looting: 5
+    sharpness: 5
+    unbreaking: 5
+    fire-aspect: 1
+    permission: "grupo.membro"
+
+  SwordVI:
+    name: "Espada VI"
+    price: 1200
+    looting: 6
+    sharpness: 6
+    unbreaking: 6
+    fire-aspect: 1
+    permission: "grupo.membro"
+
+  SwordVII:
+    name: "Espada VII"
+    price: 3600
+    looting: 7
+    sharpness: 7
+    unbreaking: 7
+    fire-aspect: 2
+    permission: "grupo.membro"
+
+  SwordVIII:
+    name: "Espada VIII"
+    price: 7200
+    looting: 8
+    sharpness: 8
+    unbreaking: 8
+    fire-aspect: 2
+    permission: "grupo.membro"
+
+  SwordIX:
+    name: "Espada IX"
+    price: 9800
+    looting: 9
+    sharpness: 9
+    unbreaking: 9
+    fire-aspect: 2
+    permission: "grupo.vip"
+
+  SwordX:
+    name: "Espada X"
+    price: 11900
+    looting: 10
+    sharpness: 10
+    unbreaking: 10
+    fire-aspect: 2
+    permission: "grupo.platina"
+
+pickaxes:
+  PickaxeVI:
+    name: "Super Picareta"
+    price: 1000
+    fortune: 6
+    efficiency: 6
+    unbreaking: 6
+    permission: "grupo.membro"
+
+  PickaxeVII:
+    name: "Super Picareta"
+    price: 3200
+    fortune: 7
+    efficiency: 7
+    unbreaking: 7
+    permission: "grupo.membro"
+
+  PickaxeVIII:
+    name: "Super Picareta"
+    price: 6800
+    fortune: 8
+    efficiency: 8
+    unbreaking: 8
+    permission: "grupo.membro"
+
+  PickaxeIX:
+    name: "Super Picareta"
+    price: 13900
+    fortune: 9
+    efficiency: 9
+    unbreaking: 9
+    permission: "grupo.vip"
+
+  PickaxeX:
+    name: "Super Picareta"
+    price: 21000
+    fortune: 10
+    efficiency: 10
+    unbreaking: 10
+    permission: "grupo.membro"
+
+  PickaxeXI:
+    name: "Super Picareta"
+    price: 44000
+    fortune: 11
+    efficiency: 11
+    unbreaking: 11
+    permission: "grupo.VIP"
+
+  PickaxeXII:
+    name: "Super Picareta"
+    price: 61000
+    fortune: 12
+    efficiency: 12
+    unbreaking: 12
+    permission: "grupo.platina"
