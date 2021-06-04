@@ -36,22 +36,7 @@ public class ArmorGiveCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 1) {
-            itemManager.giveItem(p, 0, LevelType.ARMOR_ALL);
-            p.sendMessage("§aVocê pegou uma armadura com sucesso.");
-            return true;
-        }
-
-        double gems;
-
-        try {
-            gems = Double.parseDouble(args[0].replaceAll("[^0-9]", ""));
-        } catch (Exception e) {
-            p.sendMessage("§cA quantidade inserida é inválida.");
-            return true;
-        }
-
-        itemManager.giveItem(p, gems, LevelType.ARMOR_ALL);
+        itemManager.giveItem(p, 0, LevelType.ARMOR_ALL);
         p.sendMessage("§aVocê pegou uma armadura com sucesso.");
         return true;
     }
