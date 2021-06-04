@@ -1,8 +1,10 @@
 package com.serversigma.sigmalevels.listener;
 
+import com.serversigma.sigmagems.api.SigmaGemsAPI;
 import com.serversigma.sigmalevels.utilitie.NumberFormat;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,7 +23,7 @@ public class EntityDeathListener implements Listener {
         Player p = e.getEntity().getKiller();
 
         if (p.getItemInHand() == null || p.getItemInHand().getType().equals(Material.AIR)) return;
-        if (!(p.getWorld().getName().equals("Mundo"))) return;
+        if (!(p.getWorld().getName().startsWith("Mundo"))) return;
 
         ItemStack itemStack = p.getItemInHand();
 
@@ -33,6 +35,9 @@ public class EntityDeathListener implements Listener {
         if (!nbtItem.hasKey("killedEntities")) return;
 
         double entities = nbtItem.getInteger("killedEntities");
+        int looting = itemStack.getEnchantmentLevel(Enchantment.LOOT_BONUS_MOBS);
+
+        if (looting < 20) SigmaGemsAPI.addGems(p, looting);
 
         if (entities == Double.MAX_VALUE) return;
 
