@@ -45,6 +45,8 @@ public class BlockBreakListener implements Listener {
         if (!(itemStack.getType().name().equals("DIAMOND_PICKAXE"))) return;
         if (!nbtItem.hasKey("minedBlocks")) return;
 
+        e.getBlock().setType(Material.AIR);
+
         double blocks = nbtItem.getDouble("minedBlocks");
         int fortune = itemStack.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
 
