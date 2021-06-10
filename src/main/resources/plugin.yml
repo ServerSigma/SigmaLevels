@@ -1,7 +1,8 @@
 name: SigmaLevels
 version: @version@
 authors: [DevTuca, DevKeni]
-loadbefore: [SigmaGems]
+load: POSTWORLD
+depend: [SigmaGems]
 main: com.serversigma.sigmalevels.SigmaLevels
 
 commands:

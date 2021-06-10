@@ -2,10 +2,8 @@ package com.serversigma.sigmalevels.manager;
 
 import com.serversigma.sigmalevels.runnable.EffectRunnable;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 
 @RequiredArgsConstructor
@@ -36,12 +34,13 @@ public class AltarManager {
     }
 
     public void startTask() {
-        if (altarIsBreaked() || location == null) {
+
+        loadAltarLocation();
+
+        if (location == null || altarIsBreaked()) {
             plugin.getLogger().severe("Unable to start altar effect (Location is invalid).");
             return;
         }
-
-        loadAltarLocation();
 
         if (effectRunnable == null) {
             effectRunnable = new EffectRunnable(plugin, this);
@@ -58,9 +57,9 @@ public class AltarManager {
 
     public void loadAltarLocation() {
         try {
-            World world = plugin.getServer().getWorld(location.getWorld().getName());
-            Chunk chunk = world.getChunkAt(location);
-            if (!chunk.isLoaded()) chunk.load();
+            if (!getAltarLocation().getWorld().isChunkLoaded(location.getChunk())) {
+                location.getWorld().loadChunk(location.getChunk());
+            }
         } catch (NullPointerException ignored) {}
     }
 

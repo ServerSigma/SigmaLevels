@@ -1,7 +1,7 @@
 altar:
   location:
     ==: org.bukkit.Location
-    world: Mundo_the_end
+    world: Mundo
     x: -1.0
     y: 103.0
     z: -15.0
