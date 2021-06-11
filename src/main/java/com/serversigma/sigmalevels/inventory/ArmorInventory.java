@@ -59,9 +59,9 @@ public class ArmorInventory extends PagedInventory {
             NBTItem nbtItem = new NBTItem(itemInHand);
 
             double gems = SigmaGemsAPI.getGems(player);
-            double remaningGems = level.getPrice() - gems;
+            double remaningGems = level.getPrice() - gems - nbtItem.getDouble("spentGems");
 
-            String lore = (gems >= level.getPrice())
+            String lore = remaningGems <= 0
                     && itemInHand.getEnchantmentLevel(Enchantment.PROTECTION_ENVIRONMENTAL) < level.getProtection()
                     ? "§aClique aqui para evoluir sua armadura."
                     : "§cFaltam §7" + NumberFormat.format(remaningGems) + " §cgemas para evoluir sua armadura.";
@@ -98,7 +98,7 @@ public class ArmorInventory extends PagedInventory {
                             return;
                         }
 
-                        if (gems < level.getPrice()) {
+                        if (remaningGems > 0) {
                             player.sendMessage("§cFaltam §7" + NumberFormat.format(remaningGems)
                                     + " §cgemas para evoluir sua armadura.");
                             return;
@@ -121,7 +121,10 @@ public class ArmorInventory extends PagedInventory {
 
                         player.getItemInHand().setItemMeta(itemManager.upgradeItem(itemInHand, armorLevel));
 
-                        SigmaGemsAPI.removeGems(player, (int) Math.round(level.getPrice()));
+                        SigmaGemsAPI.removeGems(player, level.getPrice() - nbtItem.getDouble("spentGems"));
+
+                        nbtItem.setDouble("spentGems", level.getPrice());
+                        nbtItem.applyNBT(itemInHand);
 
                         //noinspection deprecation
                         player.sendTitle("§a§lLEVEL UP!", level.getName());

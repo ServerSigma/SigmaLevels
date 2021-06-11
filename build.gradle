@@ -28,7 +28,7 @@ dependencies {
     pdm 'com.github.HenryFabio:inventory-api:2.0.3'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
-    compile files('APIS/SigmaGems-1.0-SNAPSHOT.jar')
+    compile files('APIS/SigmaGems-1.5-SNAPSHOT.jar')
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'

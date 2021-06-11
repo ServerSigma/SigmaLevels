@@ -3,6 +3,7 @@ package com.serversigma.sigmalevels.manager;
 import com.serversigma.sigmalevels.model.Level;
 import com.serversigma.sigmalevels.model.LevelType;
 import com.serversigma.sigmalevels.utilitie.ItemComposer;
+import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

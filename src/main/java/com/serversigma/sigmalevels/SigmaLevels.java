@@ -33,7 +33,9 @@ public final class SigmaLevels extends JavaPlugin {
                     getLogger().severe(throwable.getMessage());
                     return null;
                 }).join();
-        InventoryManager.enable(this);
+        if (!InventoryManager.isEnabled()) {
+            InventoryManager.enable(this);
+        }
         getLogger().info("Dependencies loaded.");
 
 

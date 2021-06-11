@@ -11,70 +11,70 @@ altar:
 armors:
   ArmorI:
     name: "Armadura I"
-    price: 25
+    price: 100
     unbreaking: 1
     protection: 1
     permission: "grupo.membro"
 
   ArmorII:
     name: "Armadura II"
-    price: 50
+    price: 300
     unbreaking: 2
     protection: 2
     permission: "grupo.membro"
 
   ArmorIII:
     name: "Armadura III"
-    price: 100
+    price: 600
     unbreaking: 3
     protection: 3
     permission: "grupo.membro"
 
   ArmorIV:
     name: "Armadura IV"
-    price: 200
+    price: 1800
     unbreaking: 4
     protection: 4
     permission: "grupo.membro"
 
   ArmorV:
     name: "Armadura V"
-    price: 500
+    price: 3200
     unbreaking: 5
     protection: 5
     permission: "grupo.membro"
 
   ArmorVI:
     name: "Armadura VI"
-    price: 1200
+    price: 5600
     unbreaking: 6
     protection: 6
     permission: "grupo.membro"
 
   ArmorVII:
     name: "Armadura VII"
-    price: 3600
+    price: 9100
     unbreaking: 7
     protection: 7
     permission: "grupo.membro"
 
   ArmorVIII:
     name: "Armadura VIII"
-    price: 7200
+    price: 14300
     unbreaking: 8
     protection: 8
     permission: "grupo.membro"
 
   ArmorIX:
     name: "Armadura IX"
-    price: 9800
+    price: 17900
     unbreaking: 9
     protection: 9
     permission: "grupo.vip"
 
   ArmorX:
     name: "Armadura X"
-    price: 11900
+    price: 21400
     unbreaking: 10
     protection: 10
     permission: "grupo.platina"
