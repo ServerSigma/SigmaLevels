@@ -2,30 +2,32 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'me.bristermitten.pdm' version '0.0.30'
 }
 
 group = 'com.seversigma'
 version = '2.0-SNAPSHOT'
 
-tasks.build.dependsOn('shadowJar')
+tasks.build.dependsOn('pdm')
 
 repositories {
     mavenCentral()
     maven { url = 'https://jitpack.io' }
+    maven { url = 'https://maven.enginehub.org/repo/' }
     maven { url = 'https://oss.sonatype.org/content/groups/public/' }
     maven { url = 'https://repo.codemc.org/repository/maven-public/' }
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
-    compile 'de.tr7zw:item-nbt-api-plugin:2.8.0'
-    compile 'com.github.HenryFabio:inventory-api:2.0.3'
+    pdm 'de.tr7zw:item-nbt-api-plugin:2.8.0'
+    pdm 'com.github.HenryFabio:inventory-api:2.0.3'
+
+    compile files ('APIS/SigmaGems-1.5-SNAPSHOT.jar')
+    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.0'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
-    compile files('APIS/SigmaGems-1.5-SNAPSHOT.jar')
-    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
-
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
@@ -34,11 +36,6 @@ compileJava {
 
     sourceCompatibility('1.8')
     targetCompatibility('1.8')
-}
-
-shadowJar {
-    archiveName("${project.name}-${project.version}.jar")
-    relocate('com.henryfabio.minecraft.inventoryapi', 'de.tr7zw.nbtapi')
 }
 
 processResources {
