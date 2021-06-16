@@ -1,19 +1,14 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'me.bristermitten.pdm' version '0.0.30'
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 group = 'com.seversigma'
 version = '2.0-SNAPSHOT'
 
-compileJava {
-    options.encoding('UTF-8')
-
-    sourceCompatibility('1.8')
-    targetCompatibility('1.8')
-}
+tasks.build.dependsOn('shadowJar')
 
 repositories {
     mavenCentral()
@@ -24,8 +19,8 @@ repositories {
 }
 
 dependencies {
-    pdm 'de.tr7zw:item-nbt-api-plugin:2.7.1'
-    pdm 'com.github.HenryFabio:inventory-api:2.0.3'
+    compile 'de.tr7zw:item-nbt-api-plugin:2.8.0'
+    compile 'com.github.HenryFabio:inventory-api:2.0.3'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     compile files('APIS/SigmaGems-1.5-SNAPSHOT.jar')
@@ -34,7 +29,17 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
-jar.dependsOn project.tasks.getByName("pdm")
+compileJava {
+    options.encoding('UTF-8')
+
+    sourceCompatibility('1.8')
+    targetCompatibility('1.8')
+}
+
+shadowJar {
+    archiveName("${project.name}-${project.version}.jar")
+    relocate('com.henryfabio.minecraft.inventoryapi', 'de.tr7zw.nbtapi')
+}
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {

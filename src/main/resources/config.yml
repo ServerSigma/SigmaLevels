@@ -66,14 +66,14 @@ armors:
     permission: "grupo.membro"
 
   ArmorIX:
-    name: "Armadura IX"
+    name: "Armadura IX §b[VIP]"
     price: 17900
     unbreaking: 9
     protection: 9
     permission: "grupo.vip"
 
   ArmorX:
-    name: "Armadura X"
+    name: "Armadura X §3[Platina]"
     price: 21400
     unbreaking: 10
     protection: 10
@@ -153,8 +153,8 @@ swords:
     permission: "grupo.membro"
 
   SwordIX:
-    name: "Espada IX"
-    price: 9800
+    name: "Espada IX §b[VIP]"
+    price: 8800
     looting: 9
     sharpness: 9
     unbreaking: 9
@@ -162,8 +162,8 @@ swords:
     permission: "grupo.vip"
 
   SwordX:
-    name: "Espada X"
-    price: 11900
+    name: "Espada X §3[Platina]"
+    price: 10900
     looting: 10
     sharpness: 10
     unbreaking: 10
@@ -212,16 +212,16 @@ pickaxes:
     permission: "grupo.membro"
 
   PickaxeXI:
-    name: "Super Picareta"
-    price: 44000
+    name: "Super Picareta §B[VIP]"
+    price: 32000
     fortune: 11
     efficiency: 11
     unbreaking: 11
     permission: "grupo.VIP"
 
   PickaxeXII:
-    name: "Super Picareta"
-    price: 61000
+    name: "Super Picareta §3[Platina]"
+    price: 44000
     fortune: 12
     efficiency: 12
     unbreaking: 12

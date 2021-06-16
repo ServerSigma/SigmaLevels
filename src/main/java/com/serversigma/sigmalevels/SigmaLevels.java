@@ -6,7 +6,6 @@ import com.serversigma.sigmalevels.command.PickaxeGiveCommand;
 import com.serversigma.sigmalevels.command.SwordGiveCommand;
 import com.serversigma.sigmalevels.listener.*;
 import com.serversigma.sigmalevels.manager.*;
-import me.bristermitten.pdm.PluginDependencyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,18 +25,9 @@ public final class SigmaLevels extends JavaPlugin {
         saveDefaultConfig();
 
         // Dependencies
-        getLogger().info("Loading dependencies");
-        PluginDependencyManager.of(this)
-                .loadAllDependencies()
-                .exceptionally(throwable -> {
-                    getLogger().severe(throwable.getMessage());
-                    return null;
-                }).join();
         if (!InventoryManager.isEnabled()) {
             InventoryManager.enable(this);
         }
-        getLogger().info("Dependencies loaded.");
-
 
         // Managers
         configManager = new ConfigurationManager(this);

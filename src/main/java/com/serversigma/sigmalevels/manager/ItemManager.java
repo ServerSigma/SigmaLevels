@@ -3,7 +3,6 @@ package com.serversigma.sigmalevels.manager;
 import com.serversigma.sigmalevels.model.Level;
 import com.serversigma.sigmalevels.model.LevelType;
 import com.serversigma.sigmalevels.utilitie.ItemComposer;
-import de.tr7zw.nbtapi.NBTItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -71,8 +70,6 @@ public class ItemManager {
     public ItemMeta upgradeItem(ItemStack itemStack, Level level) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         if (level.getLevelType().equals(LevelType.TOOLS_PICKAXE)) {
             itemMeta.addEnchant(Enchantment.DIG_SPEED, level.getEfficiency(), true);
@@ -94,6 +91,9 @@ public class ItemManager {
             itemMeta.addEnchant(Enchantment.DURABILITY, level.getUnbreaking(), true);
             itemMeta.setLore(getLore(itemMeta, level.getLevelType()));
         }
+
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         return itemMeta;
     }
