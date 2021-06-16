@@ -20,6 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 @RequiredArgsConstructor
 public class BlockBreakListener implements Listener {
 
+
     private final AltarManager altarManager;
 
     @EventHandler(priority = EventPriority.HIGHEST)

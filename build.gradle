@@ -13,7 +13,6 @@ tasks.build.dependsOn('pdm')
 repositories {
     mavenCentral()
     maven { url = 'https://jitpack.io' }
-    maven { url = 'https://maven.enginehub.org/repo/' }
     maven { url = 'https://oss.sonatype.org/content/groups/public/' }
     maven { url = 'https://repo.codemc.org/repository/maven-public/' }
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
@@ -25,7 +24,6 @@ dependencies {
 
     compile files ('APIS/SigmaGems-1.5-SNAPSHOT.jar')
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
-    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.0'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
