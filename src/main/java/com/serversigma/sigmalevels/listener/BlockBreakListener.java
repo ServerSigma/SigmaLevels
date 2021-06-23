@@ -14,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 @RequiredArgsConstructor
 public class BlockBreakListener implements Listener {
@@ -61,7 +59,6 @@ public class BlockBreakListener implements Listener {
         itemMeta.setDisplayName("§bSuper Picareta §8» §7" + NumberFormat.format(blocks + 1));
         itemStack.setItemMeta(itemMeta);
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 1));
     }
 
 }
